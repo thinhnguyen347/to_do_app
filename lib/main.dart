@@ -102,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  child: activeTab == 0 ? pendingTask() : completedTask())
+                  child: activeTab == 1 ? completedTask() : pendingTask())
             ])) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
