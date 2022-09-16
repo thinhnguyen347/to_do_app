@@ -24,7 +24,6 @@ Widget pendingTask() {
               child: Lottie.asset(
                 'lottie/105599-moody-dog.json',
                 width: 300,
-                height: 300,
                 fit: BoxFit.fill,
               ),
             ),

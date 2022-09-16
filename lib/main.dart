@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/components/completed.dart';
 import 'package:to_do_app/components/pending.dart';
+import 'package:to_do_app/data/constants.dart' as constant;
 
 void main() {
   runApp(const MyApp());
@@ -30,13 +31,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var currentBackground = 0;
-  var activeTab = 1;
+  late int currentBackgroundIndex;
+  late int activeTab;
+  final bg = constant.wallpaper;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    currentBackgroundIndex = 0;
+    activeTab = 0;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,12 +52,39 @@ class _MyHomePageState extends State<MyHomePage> {
         drawer: Drawer(
           child: Container(
             padding: const EdgeInsets.all(32.0),
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(
+              colors: [Color(0xFFd3e7ee), Color(0xFFABD1DE)],
+              tileMode: TileMode.clamp,
+              begin: Alignment(0.3, -1),
+              end: Alignment(-0.8, 1),
+            )),
             child: Column(
               children: <Widget>[
-                const Text('Hello Drawer'),
                 ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('Close'))
+                    onPressed: () => {
+                          setState(() {
+                            activeTab = 0;
+                            Navigator.pop(context);
+                          })
+                        },
+                    style: const ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll<Color>(Colors.teal)),
+                    child: const Text('Pending tasks')),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                    onPressed: () => {
+                          setState(() {
+                            activeTab = 1;
+                            Navigator.pop(context);
+                          })
+                        },
+                    style: const ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll<Color>(Colors.teal)),
+                    child: const Text('Completed tasks')),
+                const SizedBox(height: 16),
               ],
             ),
           ),
@@ -65,14 +96,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
               Container(
                   padding: const EdgeInsets.all(16),
-                  decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                    colors: [Color(0xFF787ff6), Color(0xFF4adede)],
-                    tileMode: TileMode.clamp,
-                    begin: Alignment(0.3, -1),
-                    end: Alignment(-0.8, 1),
-                  ))),
-              activeTab == 0 ? pendingTask() : completedTask()
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(bg[currentBackgroundIndex]),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: activeTab == 0 ? pendingTask() : completedTask())
             ])) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }

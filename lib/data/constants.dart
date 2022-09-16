@@ -1,4 +1,4 @@
-final List<String> wallpaper = [
+const List<String> wallpaper = [
   "assets/wallpaper/1.jpg",
   "assets/wallpaper/2.jpg",
   "assets/wallpaper/3.jpg",

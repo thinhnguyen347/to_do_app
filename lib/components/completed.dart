@@ -24,7 +24,6 @@ Widget completedTask() {
               child: Lottie.asset(
                 'lottie/117326-cat-playing-animation.json',
                 width: 300,
-                height: 300,
                 fit: BoxFit.fill,
               ),
             ),
