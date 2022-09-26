@@ -59,34 +59,45 @@ class _MyHomePageState extends State<MyHomePage> {
               begin: Alignment(0.3, -1),
               end: Alignment(-0.8, 1),
             )),
-            child: Column(
-              children: <Widget>[
-                ElevatedButton(
-                    onPressed: () => {
-                          setState(() {
-                            activeTab = 0;
-                            Navigator.pop(context);
-                          })
-                        },
-                    style: const ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll<Color>(Colors.teal)),
-                    child: const Text('Pending tasks')),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                    onPressed: () => {
-                          setState(() {
-                            activeTab = 1;
-                            Navigator.pop(context);
-                          })
-                        },
-                    style: const ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll<Color>(Colors.teal)),
-                    child: const Text('Completed tasks')),
-                const SizedBox(height: 16),
-              ],
-            ),
+            child: Column(children: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
+                onPressed: () => {
+                  setState(() {
+                    activeTab = 0;
+                    Navigator.pop(context);
+                  })
+                },
+                child: const Text('Pending tasks'),
+              ),
+              const SizedBox(height: 16),
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 20),
+                ),
+                onPressed: () => {
+                  setState(() {
+                    activeTab = 1;
+                    Navigator.pop(context);
+                  })
+                },
+                child: const Text('Completed tasks'),
+              ),
+              const SizedBox(height: 16),
+              // const ExpansionPanelList(
+              //     expansionCallback: (int index, bool isExpanded) {},
+              //     children: [
+              //   const ExpansionPanel(
+              //     headerBuilder: ()=>{return ListTile(
+              //         title: Text('Thay đổi hình nền'),
+              //       }
+              //      ),
+              //     body: Container(),
+              //     isExpanded: false,
+              //   )
+            ]),
           ),
         ),
         body: SafeArea(
