@@ -86,17 +86,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text('Completed tasks'),
               ),
               const SizedBox(height: 16),
-              // const ExpansionPanelList(
-              //     expansionCallback: (int index, bool isExpanded) {},
-              //     children: [
-              //   const ExpansionPanel(
-              //     headerBuilder: ()=>{return ListTile(
-              //         title: Text('Thay đổi hình nền'),
-              //       }
-              //      ),
-              //     body: Container(),
-              //     isExpanded: false,
-              //   )
+              ListView(
+                shrinkWrap: true,
+                children: const <Widget>[
+                  ExpansionTile(
+                    backgroundColor: Colors.amber,
+                    leading: Icon(Icons.settings),
+                    title: Text('Thay đổi hình nền'),
+                    children: <Widget>[
+                      ListTile(title: Text('Title of the item')),
+                      ListTile(
+                        title: Text('Title of the item2'),
+                      )
+                    ],
+                  ),
+                ],
+              )
             ]),
           ),
         ),
