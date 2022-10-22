@@ -37,89 +37,115 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    currentBackgroundIndex = 0;
+    currentBackgroundIndex = 1;
     activeTab = 0;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        extendBodyBehindAppBar: false,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-        ),
-        drawer: Drawer(
-          child: Container(
-            padding: const EdgeInsets.all(32.0),
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-              colors: [Color(0xFFd3e7ee), Color(0xFFABD1DE)],
-              tileMode: TileMode.clamp,
-              begin: Alignment(0.3, -1),
-              end: Alignment(-0.8, 1),
-            )),
-            child: Column(children: <Widget>[
-              TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 20),
-                ),
-                onPressed: () => {
-                  setState(() {
-                    activeTab = 0;
-                    Navigator.pop(context);
-                  })
-                },
-                child: const Text('Pending tasks'),
+    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+    return SafeArea(
+      child: Scaffold(
+          key: scaffoldKey,
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: IconButton(
+              onPressed: () {
+                scaffoldKey.currentState!.openDrawer();
+              },
+              icon: const Icon(
+                Icons.account_balance_outlined,
+                color: Colors.black,
+                size: 24,
               ),
-              const SizedBox(height: 16),
-              TextButton(
-                style: TextButton.styleFrom(
-                  textStyle: const TextStyle(fontSize: 20),
-                ),
-                onPressed: () => {
-                  setState(() {
-                    activeTab = 1;
-                    Navigator.pop(context);
-                  })
-                },
-                child: const Text('Completed tasks'),
-              ),
-              const SizedBox(height: 16),
-              ListView(
-                shrinkWrap: true,
-                children: const <Widget>[
-                  ExpansionTile(
-                    backgroundColor: Colors.amber,
-                    leading: Icon(Icons.settings),
-                    title: Text('Thay đổi hình nền'),
-                    children: <Widget>[
-                      ListTile(title: Text('Title of the item')),
-                      ListTile(
-                        title: Text('Title of the item2'),
-                      )
-                    ],
-                  ),
-                ],
-              )
-            ]),
+            ),
           ),
-        ),
-        body: SafeArea(
-            child: Stack(
-                alignment: AlignmentDirectional.topStart,
-                fit: StackFit.expand,
-                children: [
-              Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(bg[currentBackgroundIndex]),
-                      fit: BoxFit.cover,
-                    ),
+          drawer: Drawer(
+            child: Container(
+              padding: const EdgeInsets.only(
+                  top: 60, left: 24, right: 24, bottom: 24),
+              decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                colors: [Color(0xFFd3e7ee), Color(0xFFABD1DE)],
+                tileMode: TileMode.clamp,
+                begin: Alignment(0.3, -1),
+                end: Alignment(-0.8, 1),
+              )),
+              child: Column(children: <Widget>[
+                TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20),
                   ),
-                  child: activeTab == 0 ? pendingTask() : completedTask())
-            ])) // This trailing comma makes auto-formatting nicer for build methods.
-        );
+                  onPressed: () => {
+                    setState(() {
+                      activeTab = 0;
+                      Navigator.pop(context);
+                    })
+                  },
+                  child: const Text('Pending tasks'),
+                ),
+                const SizedBox(height: 16),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () => {
+                    setState(() {
+                      activeTab = 1;
+                      Navigator.pop(context);
+                    })
+                  },
+                  child: const Text('Completed tasks'),
+                ),
+                const SizedBox(height: 16),
+                ListView(
+                  shrinkWrap: true,
+                  children: const <Widget>[
+                    ExpansionTile(
+                      backgroundColor: Colors.amber,
+                      leading: Icon(Icons.settings),
+                      title: Text('Change background image'),
+                      children: <Widget>[
+                        ListTile(title: Text('Title of the item')),
+                        ListTile(
+                          title: Text('Title of the item2'),
+                        )
+                      ],
+                    ),
+                  ],
+                )
+              ]),
+            ),
+          ),
+          body: Stack(
+              alignment: AlignmentDirectional.topStart,
+              fit: StackFit.expand,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    scaffoldKey.currentState!.openDrawer();
+                  },
+                  icon: const Icon(
+                    Icons.account_balance_outlined,
+                    color: Colors.black,
+                    size: 24,
+                  ),
+                ),
+                Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(bg[currentBackgroundIndex]),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: activeTab == 0 ? pendingTask() : completedTask())
+              ]) // This trailing comma makes auto-formatting nicer for build methods
+          ),
+    );
   }
 }

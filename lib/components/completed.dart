@@ -9,7 +9,7 @@ Widget completedTask() {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [
-            Image.asset("images/pending.png", width: 20),
+            Image.asset("assets/images/pending.png", width: 20),
             const SizedBox(width: 12),
             const Text("Completed tasks",
                 style: TextStyle(
@@ -21,10 +21,20 @@ Widget completedTask() {
           Expanded(
             flex: 1,
             child: Center(
-              child: Lottie.asset(
-                'lottie/117326-cat-playing-animation.json',
-                width: 300,
-                fit: BoxFit.fill,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 150,
+                    height: 150,
+                    child: Lottie.asset(
+                      'assets/lottie/basket-ball.json',
+                      width: 130,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  const Text('No completed task!', style: TextStyle(color: Colors.white))
+                ],
               ),
             ),
           ),

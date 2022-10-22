@@ -9,7 +9,7 @@ Widget pendingTask() {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [
-            Image.asset("images/pending.png", width: 20),
+            Image.asset("assets/images/pending.png", width: 20),
             const SizedBox(width: 12),
             const Text("Pending tasks",
                 style: TextStyle(
@@ -21,10 +21,20 @@ Widget pendingTask() {
           Expanded(
             flex: 1,
             child: Center(
-              child: Lottie.asset(
-                'lottie/105599-moody-dog.json',
-                width: 300,
-                fit: BoxFit.fill,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 150,
+                    height: 150,
+                    child: Lottie.asset(
+                      'assets/lottie/105599-moody-dog.json',
+                      width: 130,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  const Text('No pending task!', style: TextStyle(color: Colors.white))
+                ],
               ),
             ),
           ),
