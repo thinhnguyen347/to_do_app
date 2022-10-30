@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 scaffoldKey.currentState!.openDrawer();
               },
               icon: const Icon(
-                Icons.account_balance_outlined,
+                Icons.menu,
                 color: Colors.black,
                 size: 24,
               ),
@@ -69,12 +69,14 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.only(
                   top: 60, left: 24, right: 24, bottom: 24),
               decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                colors: [Color(0xFFd3e7ee), Color(0xFFABD1DE)],
-                tileMode: TileMode.clamp,
-                begin: Alignment(0.3, -1),
-                end: Alignment(-0.8, 1),
-              )),
+                gradient: LinearGradient(
+                  colors: [Color(0xFFd3e7ee), Color(0xFFABD1DE)],
+                  tileMode: TileMode.clamp,
+                  begin: Alignment(0.3, -1),
+                  end: Alignment(-0.8, 1),
+                ),
+                backgroundBlendMode: BlendMode.darken,
+              ),
               child: Column(children: <Widget>[
                 TextButton(
                   style: TextButton.styleFrom(
@@ -136,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Container(
-                    padding: const EdgeInsets.all(16),
+                    padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 16),
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(bg[currentBackgroundIndex]),

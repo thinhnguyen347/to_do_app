@@ -3,20 +3,28 @@ import 'package:lottie/lottie.dart';
 
 Widget completedTask() {
   return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.only(top: 16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(children: [
-            Image.asset("assets/images/pending.png", width: 20),
-            const SizedBox(width: 12),
-            const Text("Completed tasks",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500))
-          ]),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                color: Colors.black38,
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadiusDirectional.circular(8)
+              ),
+            child: Row(children: [
+              Image.asset("assets/images/pending.png", width: 20),
+              const SizedBox(width: 12),
+              const Text("Completed tasks",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500))
+            ]),
+          ),
           const SizedBox(height: 16),
           Expanded(
             flex: 1,
@@ -36,12 +44,11 @@ Widget completedTask() {
                   Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.black54,
-                        shape: BoxShape.rectangle,
-                          borderRadius: BorderRadiusDirectional.circular(10)
-                      ),
+                          color: Colors.white54,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadiusDirectional.circular(8)),
                       child: const Text('No completed task!',
-                          style: TextStyle(color: Colors.white)))
+                          style: TextStyle(fontSize: 18, color: Colors.black87)))
                 ],
               ),
             ),
