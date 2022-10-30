@@ -33,7 +33,15 @@ Widget completedTask() {
                       fit: BoxFit.fill,
                     ),
                   ),
-                  const Text('No completed task!', style: TextStyle(color: Colors.white))
+                  Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.black54,
+                        shape: BoxShape.rectangle,
+                          borderRadius: BorderRadiusDirectional.circular(10)
+                      ),
+                      child: const Text('No completed task!',
+                          style: TextStyle(color: Colors.white)))
                 ],
               ),
             ),
