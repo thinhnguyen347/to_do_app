@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'no_task.dart';
+import 'package:to_do_app/components/shared/title_bar.dart';
+import 'shared/no_task.dart';
 
 Widget pendingTask() {
   return Container(
@@ -9,24 +10,9 @@ Widget pendingTask() {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-                color: Colors.black26,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadiusDirectional.circular(8)),
-            child: Row(children: [
-              Image.asset("assets/images/pending.png", width: 20),
-              const SizedBox(width: 12),
-              const Text("Pending tasks",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500))
-            ]),
-          ),
+          titleBar(0),
           const SizedBox(height: 16),
-          noTask(0),
+          // noTask(0),
           Slidable(
             key: const ValueKey(0),
             endActionPane: ActionPane(
@@ -39,6 +25,7 @@ Widget pendingTask() {
                   foregroundColor: Colors.white,
                   icon: Icons.archive,
                   label: 'Complete',
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 SlidableAction(
                   onPressed: (BuildContext context) {},
@@ -46,6 +33,7 @@ Widget pendingTask() {
                   foregroundColor: Colors.white,
                   icon: Icons.delete,
                   label: 'Delete',
+                  borderRadius: BorderRadius.circular(8),
                 ),
               ],
             ),

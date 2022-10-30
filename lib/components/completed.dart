@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'no_task.dart';
+import 'package:to_do_app/components/shared/title_bar.dart';
+import 'shared/no_task.dart';
 
 Widget completedTask() {
   return Container(
@@ -8,23 +9,7 @@ Widget completedTask() {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-                color: Colors.black38,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadiusDirectional.circular(8)
-              ),
-            child: Row(children: [
-              Image.asset("assets/images/pending.png", width: 20),
-              const SizedBox(width: 12),
-              const Text("Completed tasks",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500))
-            ]),
-          ),
+          titleBar(1),
           const SizedBox(height: 16),
           noTask(1),
         ],
