@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   child: const Text('Pending tasks'),
                 ),
-                const SizedBox(height: 16),
+                // const SizedBox(height: 10),
                 TextButton(
                   style: TextButton.styleFrom(
                     textStyle: const TextStyle(fontSize: 20),
@@ -106,16 +106,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 const SizedBox(height: 16),
                 ListView(
                   shrinkWrap: true,
-                  children: const <Widget>[
+                  children: <Widget>[
                     ExpansionTile(
-                      backgroundColor: Colors.amber,
-                      leading: Icon(Icons.settings),
-                      title: Text('Change background image'),
+                      backgroundColor: Colors.transparent,
+                      leading: const Icon(Icons.settings),
+                      title: const Text('Change background'),
                       children: <Widget>[
-                        ListTile(title: Text('Title of the item')),
-                        ListTile(
-                          title: Text('Title of the item2'),
-                        )
+                        GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              height: 48,
+                              width: 48,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(bg[2]),
+                                      fit: BoxFit.cover,
+                                      alignment: Alignment.center),
+                                  borderRadius: BorderRadius.circular(24)),
+                            ))
                       ],
                     ),
                   ],
@@ -138,7 +146,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Container(
-                    padding: const EdgeInsets.only(top: 40, left: 16, right: 16, bottom: 16),
+                    padding: const EdgeInsets.only(
+                        top: 40, left: 16, right: 16, bottom: 16),
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(bg[currentBackgroundIndex]),
