@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'no_task.dart';
 
 Widget completedTask() {
   return Container(
@@ -26,33 +26,7 @@ Widget completedTask() {
             ]),
           ),
           const SizedBox(height: 16),
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 150,
-                    height: 150,
-                    child: Lottie.asset(
-                      'assets/lottie/basket-ball.json',
-                      width: 130,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                  Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                          color: Colors.white54,
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadiusDirectional.circular(8)),
-                      child: const Text('No completed task!',
-                          style: TextStyle(fontSize: 18, color: Colors.black87)))
-                ],
-              ),
-            ),
-          ),
+          noTask(1),
         ],
       ));
 }
