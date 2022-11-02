@@ -85,7 +85,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.pop(context);
                     })
                   },
-                  child: const Text('Pending tasks', style: TextStyle(fontSize: 20, color: Colors.black)),
+                  child: const Text('Pending tasks',
+                      style: TextStyle(fontSize: 20, color: Colors.black)),
                 ),
                 // const SizedBox(height: 10),
                 TextButton(
@@ -95,32 +96,42 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.pop(context);
                     })
                   },
-                  child: const Text('Completed tasks', style: TextStyle(fontSize: 20, color: Colors.black),),
+                  child: const Text(
+                    'Completed tasks',
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                  ),
                 ),
                 const SizedBox(height: 16),
-                ListView(
-                  shrinkWrap: true,
-                  children: <Widget>[
-                    ExpansionTile(
-                      backgroundColor: Colors.transparent,
-                      leading: const Icon(Icons.settings),
-                      title: const Text('Change background'),
-                      children: <Widget>[
-                        GestureDetector(
-                            onTap: () {},
+                const Divider(),
+                const Text(
+                  'Change background',
+                  style: TextStyle(fontSize: 16),
+                ),
+                SizedBox(
+                  height: 56,
+                  width: double.infinity,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: bg.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                currentBackgroundIndex = index;
+                              });
+                            },
                             child: Container(
                               height: 48,
                               width: 48,
+                              margin: const EdgeInsets.only(right: 8, top: 8),
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage(bg[2]),
+                                      image: AssetImage(bg[index]),
                                       fit: BoxFit.cover,
                                       alignment: Alignment.center),
                                   borderRadius: BorderRadius.circular(24)),
-                            ))
-                      ],
-                    ),
-                  ],
+                            ));
+                      }),
                 )
               ]),
             ),
@@ -154,3 +165,28 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+// ListView(
+// shrinkWrap: true,
+// children: <Widget>[
+// ExpansionTile(
+// backgroundColor: Colors.transparent,
+// leading: const Icon(Icons.settings),
+// title: const Text('Change background'),
+// children: <Widget>[
+// GestureDetector(
+// onTap: () {},
+// child: Container(
+// height: 48,
+// width: 48,
+// decoration: BoxDecoration(
+// image: DecorationImage(
+// image: AssetImage(bg[2]),
+// fit: BoxFit.cover,
+// alignment: Alignment.center),
+// borderRadius: BorderRadius.circular(24)),
+// ))
+// ],
+// ),
+// ],
+// )
