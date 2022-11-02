@@ -79,29 +79,23 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: Column(children: <Widget>[
                 TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
-                  ),
                   onPressed: () => {
                     setState(() {
                       activeTab = 0;
                       Navigator.pop(context);
                     })
                   },
-                  child: const Text('Pending tasks'),
+                  child: const Text('Pending tasks', style: TextStyle(fontSize: 20, color: Colors.black)),
                 ),
                 // const SizedBox(height: 10),
                 TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 20),
-                  ),
                   onPressed: () => {
                     setState(() {
                       activeTab = 1;
                       Navigator.pop(context);
                     })
                   },
-                  child: const Text('Completed tasks'),
+                  child: const Text('Completed tasks', style: TextStyle(fontSize: 20, color: Colors.black),),
                 ),
                 const SizedBox(height: 16),
                 ListView(
