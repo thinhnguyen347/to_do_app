@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:to_do_app/components/shared/title_bar.dart';
 import 'shared/no_task.dart';
 
 Widget pendingTask() {
@@ -10,8 +9,7 @@ Widget pendingTask() {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          titleBar(0),
-          const SizedBox(height: 16),
+          const SizedBox(height: 52),
           // noTask(0),
           Slidable(
             key: const ValueKey(0),
@@ -23,17 +21,21 @@ Widget pendingTask() {
                   onPressed: (BuildContext context) {},
                   backgroundColor: const Color(0xFF7BC043),
                   foregroundColor: Colors.white,
-                  icon: Icons.archive,
-                  label: 'Complete',
-                  borderRadius: BorderRadius.circular(8),
+                  icon: Icons.edit,
+                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(8), bottomLeft: Radius.circular(8)),
                 ),
                 SlidableAction(
                   onPressed: (BuildContext context) {},
-                  backgroundColor: const Color(0xFF0392CF),
+                  backgroundColor: const Color(0xFFFCAF2C),
+                  foregroundColor: Colors.white,
+                  icon: Icons.assignment_turned_in,
+                  ),
+                SlidableAction(
+                  onPressed: (BuildContext context) {},
+                  backgroundColor: const Color(0xFFD63420),
                   foregroundColor: Colors.white,
                   icon: Icons.delete,
-                  label: 'Delete',
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: const BorderRadius.only(topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
                 ),
               ],
             ),
