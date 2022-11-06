@@ -4,13 +4,13 @@ import 'package:to_do_app/components/providers/active_tab_provider.dart';
 import 'package:to_do_app/components/providers/background_provider.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 
-
 class DrawerComponent extends StatelessWidget {
   const DrawerComponent({Key? key}) : super(key: key);
   final bg = constant.wallpaper;
 
   @override
   Widget build(BuildContext context) {
+
     return Drawer(
         child: Container(
             padding:
@@ -59,7 +59,9 @@ class DrawerComponent extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                           onTap: () {
-                            context.read<BackgroundProvider>().changeBackground(index);
+                            context
+                                .read<BackgroundProvider>()
+                                .changeBackground(index);
                           },
                           child: Container(
                             height: 48,

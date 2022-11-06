@@ -10,13 +10,21 @@ import 'package:provider/provider.dart';
 import 'components/shared/drawer.dart';
 
 void main() {
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => BackgroundProvider()),
-      ChangeNotifierProvider(create: (_) => ActiveTabProvider()),
-    ],
-    child: const MyApp(),
-  ),);
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => BackgroundProvider(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ActiveTabProvider(),
+          lazy: false,
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -43,17 +51,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late int activeTab;
   final bg = constant.wallpaper;
 
   @override
   void initState() {
-    activeTab = context.watch<ActiveTabProvider>().activeTaskTab;
     super.initState();
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
   }
 
@@ -65,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
       key: scaffoldKey,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: titleBar(activeTab),
+        title: titleBar(context.watch<ActiveTabProvider>().activeTaskTab),
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
@@ -89,11 +95,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     top: 52, left: 16, right: 16, bottom: 16),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage(bg[context.watch<BackgroundProvider>().currentBackgroundIndex]),
+                    image: AssetImage(bg[context
+                        .watch<BackgroundProvider>()
+                        .currentBackgroundIndex]),
                     fit: BoxFit.cover,
                   ),
                 ),
-                child: activeTab == 0 ? pendingTask() : completedTask())
+                child: context.watch<ActiveTabProvider>().activeTaskTab == 0
+                    ? pendingTask()
+                    : completedTask())
           ]),
       // This trailing comma makes auto-formatting nicer for build methods
       floatingActionButton: FloatingActionButton(
