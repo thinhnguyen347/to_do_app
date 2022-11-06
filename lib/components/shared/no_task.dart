@@ -24,7 +24,7 @@ Widget noTask(int screenCode ){
           Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                  color: Colors.white54,
+                  color: Colors.white70,
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadiusDirectional.circular(8)),
               child: Text('No $message task!',
