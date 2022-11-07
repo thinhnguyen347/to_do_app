@@ -1,11 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:to_do_app/components/providers/active_tab_provider.dart';
-import 'package:to_do_app/components/providers/background_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/components/completed.dart';
 import 'package:to_do_app/components/pending.dart';
+import 'package:to_do_app/components/providers/active_tab_provider.dart';
+import 'package:to_do_app/components/providers/background_provider.dart';
 import 'package:to_do_app/components/shared/title_bar.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
-import 'package:provider/provider.dart';
 
 import 'components/shared/drawer.dart';
 
@@ -52,6 +53,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final bg = constant.wallpaper;
+  final TextEditingController _textFieldController = TextEditingController();
+  late String valueText;
 
   @override
   void initState() {
@@ -108,11 +111,55 @@ class _MyHomePageState extends State<MyHomePage> {
       // This trailing comma makes auto-formatting nicer for build methods
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your onPressed code here!
+          _displayTextInputDialog(context);
         },
         backgroundColor: Colors.white54,
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  Future<void> _displayTextInputDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Add new task'),
+            // titlePadding: const EdgeInsets.symmetric(vertical: 16),
+            content: TextField(
+              onChanged: (value) {
+                setState(() {
+                  valueText = value;
+                });
+              },
+              controller: _textFieldController,
+              decoration: const InputDecoration(hintText: "Task content here!"),
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    textStyle: const TextStyle(color: Colors.white)),
+                child: const Text('Add'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    textStyle: const TextStyle(color: Colors.white)),
+                child: const Text('Cancel'),
+                onPressed: () {
+                  setState(() {
+                    Navigator.pop(context);
+                  });
+                },
+              ),
+            ],
+          );
+        });
   }
 }
