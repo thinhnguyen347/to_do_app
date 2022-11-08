@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/completed.dart';
-import 'package:to_do_app/components/pending.dart';
 import 'package:to_do_app/components/providers/active_tab_provider.dart';
 import 'package:to_do_app/components/providers/background_provider.dart';
+import 'package:to_do_app/components/providers/task_manage_provider.dart';
 import 'package:to_do_app/components/shared/add_task_dialog.dart';
 import 'package:to_do_app/components/shared/title_bar.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
+
+import 'components/pending.dart';
 import 'components/shared/drawer.dart';
 
 void main() {
@@ -19,6 +21,10 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => ActiveTabProvider(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => TasksProvider(),
           lazy: false,
         ),
       ],
@@ -34,7 +40,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Thinh`s To-Do',
+      title: 'Thinh To-Do',
       theme: ThemeData(),
       home: const MyHomePage(),
     );
@@ -102,8 +108,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 child: context.watch<ActiveTabProvider>().activeTaskTab == 0
-                    ? pendingTask()
-                    : completedTask())
+                    ? const PendingTasks()
+                    : const CompletedTasks())
           ]),
       // This trailing comma makes auto-formatting nicer for build methods
       floatingActionButton: FloatingActionButton(
