@@ -4,7 +4,7 @@ import 'package:to_do_app/components/completed.dart';
 import 'package:to_do_app/components/pending.dart';
 import 'package:to_do_app/components/providers/active_tab_provider.dart';
 import 'package:to_do_app/components/providers/background_provider.dart';
-import 'package:to_do_app/components/shared/custom-dialog.dart';
+import 'package:to_do_app/components/shared/add_task_dialog.dart';
 import 'package:to_do_app/components/shared/title_bar.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 import 'components/shared/drawer.dart';
@@ -33,12 +33,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'To-Do App',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blue,
-      // ),
-      home: MyHomePage(),
+    return MaterialApp(
+      title: 'Thinh`s To-Do',
+      theme: ThemeData(),
+      home: const MyHomePage(),
     );
   }
 }
@@ -123,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return showDialog(
         context: context,
         builder: (context) {
-          return DialogPopup(controller: _textFieldController);
+          return NewTaskDialog(controller: _textFieldController);
         });
   }
 }

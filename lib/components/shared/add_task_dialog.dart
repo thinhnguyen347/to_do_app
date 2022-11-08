@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DialogPopup extends StatelessWidget {
-  const DialogPopup({Key? key, required this.controller}) : super(key: key);
+class NewTaskDialog extends StatelessWidget {
+  const NewTaskDialog({Key? key, required this.controller}) : super(key: key);
   final TextEditingController controller;
 
   @override
@@ -35,7 +35,8 @@ class DialogPopup extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(100, 40),
                           backgroundColor: Colors.red,
-                          textStyle: const TextStyle(color: Colors.white, fontSize: 18)),
+                          textStyle: const TextStyle(
+                              color: Colors.white, fontSize: 18)),
                       child: const Text('Cancel'),
                       onPressed: () {
                         Navigator.pop(context);
@@ -45,7 +46,8 @@ class DialogPopup extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           fixedSize: const Size(100, 40),
                           backgroundColor: Colors.green,
-                          textStyle: const TextStyle(color: Colors.white, fontSize: 18)),
+                          textStyle: const TextStyle(
+                              color: Colors.white, fontSize: 18)),
                       child: const Text('Add'),
                       onPressed: () {
                         Navigator.pop(context);
