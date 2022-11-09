@@ -27,7 +27,19 @@ class TasksProvider with ChangeNotifier, DiagnosticableTreeMixin {
   }
 
   void editPendingTask(int index, String value) {
-    _pendingTasks[index]['taskContent'] = value;
+    _pendingTasks.removeAt(index);
+
+    var uuid = const Uuid();
+    var task = {};
+    task['id'] = uuid.v1();
+    task['taskContent'] = value;
+    task['timeStamp'] = DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now());
+
+    if (kDebugMode) {
+      print(_pendingTasks);
+    }
+
+    _pendingTasks.insert(index, task);
     notifyListeners();
   }
 

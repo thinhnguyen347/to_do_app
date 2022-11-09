@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/providers/task_manage_provider.dart';
+import 'package:to_do_app/components/shared/alert_dialog.dart';
 
 import 'shared/no_task.dart';
 
 class PendingTasks extends StatelessWidget {
   const PendingTasks({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final pendingTask = context.watch<TasksProvider>().pendingTasks;
@@ -107,12 +109,8 @@ Future<void> displayEditDialog(
                     const SizedBox(height: 16),
                     TextFormField(
                       initialValue: task['taskContent'],
-                      onSaved: (value) {
-                        if (value != null) {
-                          context
-                              .read<TasksProvider>()
-                              .editPendingTask(index, value);
-                        } else {}
+                      onChanged: (value) {
+                        controller.text = value;
                       },
                     ),
                     const SizedBox(height: 16),
@@ -139,12 +137,17 @@ Future<void> displayEditDialog(
                                   color: Colors.white, fontSize: 18)),
                           child: const Text('Update'),
                           onPressed: () {
-                            context
-                                .read<TasksProvider>()
-                                .addNewTask(controller.text);
-                            Navigator.pop(context);
-                          },
-                        ),
+                            if (controller.text.isNotEmpty) {
+                              context
+                                  .read<TasksProvider>()
+                                  .editPendingTask(index, controller.text);
+                              Navigator.pop(context);
+                            } else {
+                              Navigator.pop(context);
+                              showInfoDialog( context, 'Update could not be processed due to your empty input', true);
+                            }
+                            },
+                        )
                       ],
                     )
                   ],
