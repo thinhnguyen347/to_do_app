@@ -11,7 +11,7 @@ class NewTaskDialog extends StatelessWidget {
     return Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Container(
-            height: 250,
+            height: 200,
             alignment: Alignment.center,
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -20,13 +20,11 @@ class NewTaskDialog extends StatelessWidget {
                     style:
                         TextStyle(fontWeight: FontWeight.w500, fontSize: 20)),
                 const SizedBox(height: 16),
-                Expanded(
-                  child: TextField(
-                    controller: controller,
-                    maxLines: 4,
-                    minLines: 4,
-                    autofocus: true,
-                  ),
+                TextField(
+                  controller: controller,
+                  maxLines: 2,
+                  minLines: 2,
+                  autofocus: true,
                 ),
                 const SizedBox(height: 16),
                 Row(

@@ -5,7 +5,6 @@ import 'package:to_do_app/components/providers/active_tab_provider.dart';
 import 'package:to_do_app/components/providers/background_provider.dart';
 import 'package:to_do_app/components/providers/task_manage_provider.dart';
 import 'package:to_do_app/components/shared/add_task_dialog.dart';
-import 'package:to_do_app/components/shared/title_bar.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 
 import 'components/pending.dart';
@@ -75,41 +74,76 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       key: scaffoldKey,
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: titleBar(context.watch<ActiveTabProvider>().activeTaskTab),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            scaffoldKey.currentState!.openDrawer();
-          },
-          icon: const Icon(
-            Icons.menu,
-            color: Colors.black,
-            size: 24,
-          ),
-        ),
-      ),
       drawer: const DrawerComponent(),
       body: Stack(
           alignment: AlignmentDirectional.topStart,
           fit: StackFit.expand,
           children: [
             Container(
-                padding: const EdgeInsets.only(
-                    top: 52, left: 16, right: 16, bottom: 16),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(bg[context
-                        .watch<BackgroundProvider>()
-                        .currentBackgroundIndex]),
-                    fit: BoxFit.cover,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(bg[context
+                      .watch<BackgroundProvider>()
+                      .currentBackgroundIndex]),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Column(
+              children: [
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          scaffoldKey.currentState!.openDrawer();
+                        },
+                        icon: const Icon(
+                          Icons.menu,
+                          color: Colors.black,
+                          size: 24,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.info,
+                          color: Colors.black,
+                          size: 24,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                child: context.watch<ActiveTabProvider>().activeTaskTab == 0
-                    ? const PendingTasks()
-                    : const CompletedTasks())
+                Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    decoration: BoxDecoration(
+                        color: Colors.black26,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadiusDirectional.circular(8)),
+                    child: Text(
+                        context.watch<ActiveTabProvider>().activeTaskTab == 0
+                            ? 'Pending tasks'
+                            : 'Completed Tasks',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            fontSize: 22,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold))),
+                const SizedBox(height: 16),
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: context.watch<ActiveTabProvider>().activeTaskTab == 0
+                      ? const PendingTasks()
+                      : const CompletedTasks(),
+                ),
+              ],
+            )
           ]),
       // This trailing comma makes auto-formatting nicer for build methods
       floatingActionButton: FloatingActionButton(

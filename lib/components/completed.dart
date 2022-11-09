@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/providers/task_manage_provider.dart';
+
 import 'shared/no_task.dart';
 
 class CompletedTasks extends StatelessWidget {
@@ -11,16 +12,14 @@ class CompletedTasks extends StatelessWidget {
   Widget build(BuildContext context) {
     final completedTask = context.watch<TasksProvider>().completedTasks;
 
-    return Container(
-        padding: const EdgeInsets.only(top: 16),
-        child: completedTask.isEmpty
-            ? noTask(0)
-            : ListView.builder(
+    return completedTask.isEmpty
+        ? noTask(1)
+        : ListView.builder(
             scrollDirection: Axis.vertical,
             itemCount: completedTask.length,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 4),
                   child: Slidable(
                     key: const ValueKey(0),
                     endActionPane: ActionPane(
@@ -54,21 +53,18 @@ class CompletedTasks extends StatelessWidget {
                       ],
                     ),
                     child: Container(
-                        width: double.maxFinite,
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                            color: Colors.white70,
-                            borderRadius:
-                            BorderRadiusDirectional.circular(8)),
-                        child: Column(
-                          children: [
-                            Text(completedTask[index].taskContent,
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500)),
-                          ],
-                        )),
+                      alignment: Alignment.centerLeft,
+                      width: double.maxFinite,
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                          color: Colors.white70,
+                          borderRadius: BorderRadiusDirectional.circular(8)),
+                      child: Text(completedTask[index]['taskContent'],
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500)),
+                    ),
                   ));
-            }));
+            });
   }
 }
