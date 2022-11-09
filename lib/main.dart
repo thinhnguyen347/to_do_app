@@ -4,7 +4,7 @@ import 'package:to_do_app/components/completed.dart';
 import 'package:to_do_app/components/providers/active_tab_provider.dart';
 import 'package:to_do_app/components/providers/background_provider.dart';
 import 'package:to_do_app/components/providers/task_manage_provider.dart';
-import 'package:to_do_app/components/shared/add_task_dialog.dart';
+import 'package:to_do_app/components/shared/new_task_dialog.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 
 import 'components/pending.dart';

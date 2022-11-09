@@ -10,7 +10,6 @@ class DrawerComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Drawer(
         child: Container(
             padding:
@@ -33,7 +32,7 @@ class DrawerComponent extends StatelessWidget {
                 child: const Text('Pending tasks',
                     style: TextStyle(fontSize: 20, color: Colors.black)),
               ),
-              // const SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
                   context.read<ActiveTabProvider>().setActiveTab(1);

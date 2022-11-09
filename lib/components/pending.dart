@@ -26,10 +26,12 @@ class PendingTasks extends StatelessWidget {
                     key: const ValueKey(0),
                     endActionPane: ActionPane(
                       motion: const ScrollMotion(),
-                      dismissible: DismissiblePane(onDismissed: () {}),
                       children: [
                         SlidableAction(
-                          onPressed: (BuildContext context) {},
+                          onPressed: (BuildContext context) {
+                            displayEditDialog(
+                                context, pendingTask[index], index);
+                          },
                           backgroundColor: const Color(0xFF7BC043),
                           foregroundColor: Colors.white,
                           icon: Icons.edit,
@@ -38,13 +40,21 @@ class PendingTasks extends StatelessWidget {
                               bottomLeft: Radius.circular(8)),
                         ),
                         SlidableAction(
-                          onPressed: (BuildContext context) {},
+                          onPressed: (BuildContext context) {
+                            context
+                                .read<TasksProvider>()
+                                .completePendingTask(index);
+                          },
                           backgroundColor: const Color(0xFFFCAF2C),
                           foregroundColor: Colors.white,
                           icon: Icons.assignment_turned_in,
                         ),
                         SlidableAction(
-                          onPressed: (BuildContext context) {},
+                          onPressed: (BuildContext context) {
+                            context
+                                .read<TasksProvider>()
+                                .deletePendingTask(index);
+                          },
                           backgroundColor: const Color(0xFFD63420),
                           foregroundColor: Colors.white,
                           icon: Icons.delete,
@@ -55,6 +65,7 @@ class PendingTasks extends StatelessWidget {
                       ],
                     ),
                     child: Container(
+                        alignment: Alignment.centerLeft,
                         width: double.maxFinite,
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
@@ -72,4 +83,71 @@ class PendingTasks extends StatelessWidget {
             },
           );
   }
+}
+
+Future<void> displayEditDialog(
+    BuildContext context, Map task, int index) async {
+  final TextEditingController controller = TextEditingController();
+
+  return showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            child: Container(
+                height: 200,
+                alignment: Alignment.center,
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    const Text('Edit a task',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 20)),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      initialValue: task['taskContent'],
+                      onSaved: (value) {
+                        if (value != null) {
+                          context
+                              .read<TasksProvider>()
+                              .editPendingTask(index, value);
+                        } else {}
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: const Size(100, 40),
+                              backgroundColor: Colors.red,
+                              textStyle: const TextStyle(
+                                  color: Colors.white, fontSize: 18)),
+                          child: const Text('Cancel'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: const Size(100, 40),
+                              backgroundColor: Colors.green,
+                              textStyle: const TextStyle(
+                                  color: Colors.white, fontSize: 18)),
+                          child: const Text('Update'),
+                          onPressed: () {
+                            context
+                                .read<TasksProvider>()
+                                .addNewTask(controller.text);
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    )
+                  ],
+                )));
+      });
 }

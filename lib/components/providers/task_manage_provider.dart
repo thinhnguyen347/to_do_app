@@ -26,15 +26,32 @@ class TasksProvider with ChangeNotifier, DiagnosticableTreeMixin {
     notifyListeners();
   }
 
+  void editPendingTask(int index, String value) {
+    _pendingTasks[index]['taskContent'] = value;
+    notifyListeners();
+  }
+
   void deletePendingTask(int index) {
+    _pendingTasks.removeAt(index);
     notifyListeners();
   }
 
   void completePendingTask(int index) {
+    _completedTasks.add(_pendingTasks[index]);
+    _pendingTasks.removeAt(index);
+
+    notifyListeners();
+  }
+
+  void undoCompletedTask(int index) {
+    _pendingTasks.add(_completedTasks[index]);
+    _completedTasks.removeAt(index);
+
     notifyListeners();
   }
 
   void deleteCompletedTask(int index) {
+    _completedTasks.removeAt(index);
     notifyListeners();
   }
 }
