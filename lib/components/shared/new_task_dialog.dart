@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/components/providers/task_manage_provider.dart';
+import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class NewTaskDialog extends StatelessWidget {
   const NewTaskDialog({Key? key, required this.controller}) : super(key: key);

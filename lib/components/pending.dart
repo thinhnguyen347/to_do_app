@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/components/providers/task_manage_provider.dart';
 import 'package:to_do_app/components/shared/alert_dialog.dart';
-
-import 'shared/no_task.dart';
+import 'package:to_do_app/components/shared/no_task.dart';
+import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class PendingTasks extends StatelessWidget {
   const PendingTasks({Key? key}) : super(key: key);
@@ -144,9 +143,12 @@ Future<void> displayEditDialog(
                               Navigator.pop(context);
                             } else {
                               Navigator.pop(context);
-                              showInfoDialog( context, 'Update could not be processed due to your empty input', true);
+                              showInfoDialog(
+                                  context,
+                                  'Update could not be processed due to your empty input',
+                                  true);
                             }
-                            },
+                          },
                         )
                       ],
                     )

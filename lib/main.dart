@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/completed.dart';
-import 'package:to_do_app/components/providers/active_tab_provider.dart';
-import 'package:to_do_app/components/providers/background_provider.dart';
-import 'package:to_do_app/components/providers/task_manage_provider.dart';
+import 'package:to_do_app/components/pending.dart';
+import 'package:to_do_app/components/shared/drawer.dart';
 import 'package:to_do_app/components/shared/new_task_dialog.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
+import 'package:to_do_app/providers/active_tab_provider.dart';
+import 'package:to_do_app/providers/background_provider.dart';
+import 'package:to_do_app/providers/task_manage_provider.dart';
+import 'package:to_do_app/utilities/app_shared_preferences.dart';
 
-import 'components/pending.dart';
-import 'components/shared/drawer.dart';
-
-void main() {
+Future main() async {
+  await AppSharedPreferences.init();
   runApp(
     MultiProvider(
       providers: [
@@ -56,7 +57,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final bg = constant.wallpaper;
   final TextEditingController _textFieldController = TextEditingController();
-  late String valueText;
 
   @override
   void initState() {
@@ -93,8 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: [
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

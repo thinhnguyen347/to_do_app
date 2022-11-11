@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/components/providers/active_tab_provider.dart';
-import 'package:to_do_app/components/providers/background_provider.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
+import 'package:to_do_app/providers/active_tab_provider.dart';
+import 'package:to_do_app/providers/background_provider.dart';
 
 class DrawerComponent extends StatelessWidget {
   const DrawerComponent({Key? key}) : super(key: key);
