@@ -6,11 +6,11 @@ import 'package:to_do_app/utilities/app_shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 class TasksProvider with ChangeNotifier, DiagnosticableTreeMixin {
-  final List<Map> _pendingTasks =
-      jsonDecode(AppSharedPreferences.getPendingTasks());
+  final List<Map> _pendingTasks = [];
+      // jsonDecode(AppSharedPreferences.getPendingTasks());
 
-  final List<Map> _completedTasks =
-      jsonDecode(AppSharedPreferences.getCompletedTasks());
+  final List<Map> _completedTasks = [];
+      // jsonDecode(AppSharedPreferences.getCompletedTasks());
 
   bool get hasNoPendingTask => _pendingTasks.isEmpty;
 

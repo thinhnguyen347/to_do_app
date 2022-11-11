@@ -26,5 +26,5 @@ class AppSharedPreferences {
       _preferences?.getString(_keyCompletedTasks) ?? '[]';
 
   static int getBackground() =>
-      int.tryParse(_preferences?.getString(_keyBackground) ?? '') ?? 3;
+       3;
 }

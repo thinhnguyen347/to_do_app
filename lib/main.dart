@@ -57,10 +57,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final bg = constant.wallpaper;
   final TextEditingController _textFieldController = TextEditingController();
+  late int imgIndex = 4;
 
   @override
   void initState() {
     super.initState();
+    imgIndex = context
+        .watch<BackgroundProvider>()
+        .currentBackgroundIndex;
   }
 
   @override
@@ -82,9 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(bg[context
-                      .watch<BackgroundProvider>()
-                      .currentBackgroundIndex]),
+                  image: AssetImage(bg[imgIndex]),
                   fit: BoxFit.cover,
                 ),
               ),
