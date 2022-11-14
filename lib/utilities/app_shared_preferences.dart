@@ -19,12 +19,11 @@ class AppSharedPreferences {
   static Future setBackgroundIndex(int number) async =>
       await _preferences?.setString(_keyBackground, number.toString());
 
-  static Future<String> getPendingTasks() async =>
+  static String getPendingTasks() =>
       _preferences?.getString(_keyPendingTasks) ?? '[]';
 
-  static Future<String> getCompletedTasks() async =>
+  static String getCompletedTasks() =>
       _preferences?.getString(_keyCompletedTasks) ?? '[]';
 
-  static Future<int> getBackground() async =>
-      _preferences!.getInt(_keyBackground) ?? 1;
+  static int getBackground() => _preferences!.getInt(_keyBackground) ?? 1;
 }

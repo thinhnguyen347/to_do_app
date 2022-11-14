@@ -62,9 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    imgIndex = context
-        .watch<BackgroundProvider>()
-        .currentBackgroundIndex;
+    imgIndex = AppSharedPreferences.getBackground();
   }
 
   @override
