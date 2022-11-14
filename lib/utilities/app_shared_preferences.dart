@@ -11,19 +11,19 @@ class AppSharedPreferences {
       _preferences = await SharedPreferences.getInstance();
 
   static Future setPendingTasks(String pendingTasks) async =>
-      await _preferences!.setString(_keyPendingTasks, pendingTasks);
+      await _preferences?.setString(_keyPendingTasks, pendingTasks);
 
   static Future setCompletedTasks(String completedTasks) async =>
-      await _preferences!.setString(_keyCompletedTasks, completedTasks);
+      await _preferences?.setString(_keyCompletedTasks, completedTasks);
 
   static Future setBackgroundIndex(int number) async =>
-      await _preferences!.setString(_keyBackground, number.toString());
+      await _preferences?.setString(_keyBackground, number.toString());
 
   static Future<String> getPendingTasks() async =>
-      _preferences!.getString(_keyPendingTasks) ?? '[]';
+      _preferences?.getString(_keyPendingTasks) ?? '[]';
 
   static Future<String> getCompletedTasks() async =>
-      _preferences!.getString(_keyCompletedTasks) ?? '[]';
+      _preferences?.getString(_keyCompletedTasks) ?? '[]';
 
   static Future<int> getBackground() async =>
       _preferences!.getInt(_keyBackground) ?? 1;
