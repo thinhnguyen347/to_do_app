@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/completed.dart';
@@ -57,12 +59,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final bg = constant.wallpaper;
   final TextEditingController _textFieldController = TextEditingController();
-  late int imgIndex = 4;
+  late int imgIndex = 0;
+  late List<Map> pendingTasks;
+  late List<Map> completedTasks;
 
   @override
   void initState() {
     super.initState();
     imgIndex = AppSharedPreferences.getBackground();
+    pendingTasks = getPendingTasks() ?? [];
+    completedTasks = getCompletedTasks() ?? [];
   }
 
   @override
@@ -140,7 +146,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   Flexible(
                     fit: FlexFit.tight,
                     child: context.watch<ActiveTabProvider>().activeTaskTab == 0
-                        ? const PendingTasks()
+                        ? PendingTasks(
+                            pendingTasks: pendingTasks,
+                          )
                         : const CompletedTasks(),
                   ),
                 ],
@@ -165,5 +173,19 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context) {
           return NewTaskDialog(controller: _textFieldController);
         });
+  }
+
+  getPendingTasks() {
+    var tasks = AppSharedPreferences.getPendingTasks();
+    if (tasks != null) {
+      return tasks.map((e) => jsonDecode(e));
+    }
+  }
+
+  getCompletedTasks() {
+    var tasks = AppSharedPreferences.getCompletedTasks();
+    if (tasks != null) {
+      return tasks.map((e) => jsonDecode(e));
+    }
   }
 }

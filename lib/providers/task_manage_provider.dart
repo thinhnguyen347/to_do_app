@@ -7,10 +7,8 @@ import 'package:uuid/uuid.dart';
 
 class TasksProvider with ChangeNotifier {
   final List<Map> _pendingTasks = [];
-  // jsonDecode(AppSharedPreferences.getPendingTasks() as String);
 
   final List<Map> _completedTasks = [];
-  // jsonDecode(AppSharedPreferences.getCompletedTasks() as String);
 
   bool get hasNoPendingTask => _pendingTasks.isEmpty;
 
@@ -33,7 +31,9 @@ class TasksProvider with ChangeNotifier {
     task['timeStamp'] = DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now());
 
     _pendingTasks.add(task);
-    AppSharedPreferences.setPendingTasks(jsonEncode(_pendingTasks));
+
+    var temp = _pendingTasks.map((e) => jsonEncode(e)).toList();
+    AppSharedPreferences.setPendingTasks(temp);
 
     notifyListeners();
   }
@@ -48,40 +48,50 @@ class TasksProvider with ChangeNotifier {
     task['timeStamp'] = DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now());
 
     _pendingTasks.insert(index, task);
-    AppSharedPreferences.setPendingTasks(jsonEncode(_pendingTasks));
+
+    var temp = _pendingTasks.map((e) => jsonEncode(e)).toList();
+    AppSharedPreferences.setPendingTasks(temp);
 
     notifyListeners();
   }
 
   void deletePendingTask(int index) {
     _pendingTasks.removeAt(index);
-    AppSharedPreferences.setPendingTasks(jsonEncode(_pendingTasks));
+
+    var temp = _pendingTasks.map((e) => jsonEncode(e)).toList();
+    AppSharedPreferences.setPendingTasks(temp);
+
     notifyListeners();
   }
 
   void completePendingTask(int index) {
     _completedTasks.add(_pendingTasks[index]);
-    AppSharedPreferences.setCompletedTasks(jsonEncode(_completedTasks));
+    var temp = _completedTasks.map((e) => jsonEncode(e)).toList();
+    AppSharedPreferences.setCompletedTasks(temp);
 
     _pendingTasks.removeAt(index);
-    AppSharedPreferences.setPendingTasks(jsonEncode(_pendingTasks));
+    var temp2 = _pendingTasks.map((e) => jsonEncode(e)).toList();
+    AppSharedPreferences.setPendingTasks(temp2);
 
     notifyListeners();
   }
 
   void undoCompletedTask(int index) {
     _pendingTasks.add(_completedTasks[index]);
-    AppSharedPreferences.setPendingTasks(jsonEncode(_pendingTasks));
+    var temp = _pendingTasks.map((e) => jsonEncode(e)).toList();
+    AppSharedPreferences.setPendingTasks(temp);
 
     _completedTasks.removeAt(index);
-    AppSharedPreferences.setCompletedTasks(jsonEncode(_completedTasks));
+    var temp2 = _completedTasks.map((e) => jsonEncode(e)).toList();
+    AppSharedPreferences.setCompletedTasks(temp2);
 
     notifyListeners();
   }
 
   void deleteCompletedTask(int index) {
     _completedTasks.removeAt(index);
-    AppSharedPreferences.setCompletedTasks(jsonEncode(_completedTasks));
+    var temp2 = _completedTasks.map((e) => jsonEncode(e)).toList();
+    AppSharedPreferences.setCompletedTasks(temp2);
 
     notifyListeners();
   }

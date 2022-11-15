@@ -6,21 +6,20 @@ import 'package:to_do_app/components/shared/no_task.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class PendingTasks extends StatelessWidget {
-  const PendingTasks({Key? key}) : super(key: key);
+  final List<Map> pendingTasks;
+  const PendingTasks({Key? key, required this.pendingTasks}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final pendingTask = context.watch<TasksProvider>().pendingTasks;
-
-    return pendingTask.isEmpty
+    return pendingTasks.isEmpty
         ? noTask(0)
         : ListView.builder(
             scrollDirection: Axis.vertical,
-            itemCount: pendingTask.length,
+            itemCount: pendingTasks.length,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                   padding: EdgeInsets.only(
-                      bottom: index + 1 == pendingTask.length ? 16 : 8,
+                      bottom: index + 1 == pendingTasks.length ? 16 : 8,
                       left: 16,
                       right: 16),
                   child: Slidable(
@@ -31,7 +30,7 @@ class PendingTasks extends StatelessWidget {
                         SlidableAction(
                           onPressed: (BuildContext context) {
                             displayEditDialog(
-                                context, pendingTask[index], index);
+                                context, pendingTasks[index], index);
                           },
                           backgroundColor: const Color(0xFF7BC043),
                           foregroundColor: Colors.white,
@@ -74,7 +73,7 @@ class PendingTasks extends StatelessWidget {
                             borderRadius: BorderRadiusDirectional.circular(8)),
                         child: Column(
                           children: [
-                            Text(pendingTask[index]['taskContent'],
+                            Text(pendingTasks[index]['taskContent'],
                                 style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w500)),
