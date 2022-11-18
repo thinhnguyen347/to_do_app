@@ -12,8 +12,7 @@ import 'package:to_do_app/providers/background_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 import 'package:to_do_app/utilities/app_shared_preferences.dart';
 
-Future main() async {
-  await AppSharedPreferences.init();
+main() {
   runApp(
     MultiProvider(
       providers: [
@@ -66,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    AppSharedPreferences.init();
     imgIndex = AppSharedPreferences.getBackground();
     pendingTasks = getPendingTasks() ?? [];
     completedTasks = getCompletedTasks() ?? [];
@@ -149,7 +149,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         ? PendingTasks(
                             pendingTasks: pendingTasks,
                           )
-                        : const CompletedTasks(),
+                        : CompletedTasks(
+                            completedTasks: completedTasks,
+                          ),
                   ),
                 ],
               ),

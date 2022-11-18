@@ -5,21 +5,20 @@ import 'package:to_do_app/components/shared/no_task.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class CompletedTasks extends StatelessWidget {
-  const CompletedTasks({Key? key}) : super(key: key);
+  final List<Map> completedTasks;
+  const CompletedTasks({Key? key, required this.completedTasks}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final completedTask = context.watch<TasksProvider>().completedTasks;
-
-    return completedTask.isEmpty
+    return completedTasks.isEmpty
         ? noTask(1)
         : ListView.builder(
             scrollDirection: Axis.vertical,
-            itemCount: completedTask.length,
+            itemCount: completedTasks.length,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
                   padding: EdgeInsets.only(
-                      bottom: index + 1 == completedTask.length ? 16 : 8,
+                      bottom: index + 1 == completedTasks.length ? 16 : 8,
                       left: 16,
                       right: 16),
                   child: Slidable(
@@ -62,7 +61,7 @@ class CompletedTasks extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.white70,
                           borderRadius: BorderRadiusDirectional.circular(8)),
-                      child: Text(completedTask[index]['taskContent'],
+                      child: Text(completedTasks[index]['taskContent'],
                           style: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w500)),
