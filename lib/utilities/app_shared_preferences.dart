@@ -1,29 +1,33 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSharedPreferences {
-  static SharedPreferences? _preferences;
+  static setPendingTasks(List<String> pendingTasks) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setStringList('pendingTasks', pendingTasks);
+  }
 
-  static const _keyPendingTasks = 'pendingTasks';
-  static const _keyCompletedTasks = 'completedTasks';
-  static const _keyBackground = 'background';
+  static setCompletedTasks(List<String> completedTasks) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setStringList('completedTasks', completedTasks);
+  }
 
-  static Future init() async =>
-      _preferences = await SharedPreferences.getInstance();
+  static setBackgroundIndex(int number) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setString('background', number.toString());
+  }
 
-  static Future setPendingTasks(List<String> pendingTasks) async =>
-      await _preferences?.setStringList(_keyPendingTasks, pendingTasks);
+  static Future<List<String>?> getPendingTasks() async {
+    final preferences = await SharedPreferences.getInstance();
+    return preferences.getStringList('pendingTasks');
+  }
 
-  static Future setCompletedTasks(List<String> completedTasks) async =>
-      await _preferences?.setStringList(_keyCompletedTasks, completedTasks);
+  static Future<List<String>?> getCompletedTasks() async {
+    final preferences = await SharedPreferences.getInstance();
+    return preferences.getStringList('completedTasks');
+  }
 
-  static Future setBackgroundIndex(int number) async =>
-      await _preferences?.setString(_keyBackground, number.toString());
-
-  static List<String>? getPendingTasks() =>
-      _preferences?.getStringList(_keyPendingTasks);
-
-  static List<String>? getCompletedTasks() =>
-      _preferences?.getStringList(_keyCompletedTasks);
-
-  static int getBackground() => _preferences!.getInt(_keyBackground) ?? 1;
+  static Future<int?> getBackground() async {
+    final preferences = await SharedPreferences.getInstance();
+    return preferences.getInt('background');
+  }
 }

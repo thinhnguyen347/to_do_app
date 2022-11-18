@@ -65,8 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    AppSharedPreferences.init();
-    imgIndex = AppSharedPreferences.getBackground();
+    AppSharedPreferences.getBackground();
     pendingTasks = getPendingTasks() ?? [];
     completedTasks = getCompletedTasks() ?? [];
   }
@@ -178,14 +177,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   getPendingTasks() {
-    var tasks = AppSharedPreferences.getPendingTasks();
+    var tasks = getPendingTasks();
     if (tasks != null) {
       return tasks.map((e) => jsonDecode(e));
     }
   }
 
   getCompletedTasks() {
-    var tasks = AppSharedPreferences.getCompletedTasks();
+    var tasks = getCompletedTasks();
     if (tasks != null) {
       return tasks.map((e) => jsonDecode(e));
     }

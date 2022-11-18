@@ -3,8 +3,13 @@ import 'package:to_do_app/data/constants.dart' as constant;
 import 'package:to_do_app/utilities/app_shared_preferences.dart';
 
 class BackgroundProvider with ChangeNotifier, DiagnosticableTreeMixin {
-  int _currentBackgroundIndex = AppSharedPreferences.getBackground();
+  int _currentBackgroundIndex = 0;
+  int tempBg = 0;
   final bg = constant.wallpaper;
+
+  set setBgIndex(int number) {
+    _currentBackgroundIndex = number;
+  }
 
   int get currentBackgroundIndex => _currentBackgroundIndex;
 
