@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppSharedPreferences {
@@ -13,7 +14,7 @@ class AppSharedPreferences {
 
   static setBackgroundIndex(int number) async {
     final preferences = await SharedPreferences.getInstance();
-    preferences.setString('background', number.toString());
+    preferences.setInt('background', number);
   }
 
   static Future<List<String>?> getPendingTasks() async {

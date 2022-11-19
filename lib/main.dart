@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/completed.dart';
@@ -12,7 +11,7 @@ import 'package:to_do_app/providers/background_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 import 'package:to_do_app/utilities/app_shared_preferences.dart';
 
-main() {
+void main() {
   runApp(
     MultiProvider(
       providers: [
@@ -58,16 +57,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final bg = constant.wallpaper;
   final TextEditingController _textFieldController = TextEditingController();
-  late int imgIndex = 0;
-  late List<Map> pendingTasks;
-  late List<Map> completedTasks;
+  int imgIndex = 0;
+  List<Map> pendingTasks = [];
+  List<Map> completedTasks = [];
 
   @override
   void initState() {
     super.initState();
-    AppSharedPreferences.getBackground();
-    pendingTasks = getPendingTasks() ?? [];
-    completedTasks = getCompletedTasks() ?? [];
+    AppSharedPreferences.getBackground().then((value) {
+      context.read<BackgroundProvider>().changeBackground(value ?? 0);
+    });
+
+    getPendingTasks();
+    getCompletedTasks();
   }
 
   @override
@@ -78,18 +80,24 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    imgIndex = context.watch<BackgroundProvider>().currentBackgroundIndex;
+    pendingTasks = context.watch<TasksProvider>().pendingTasks;
+    completedTasks = context.watch<TasksProvider>().completedTasks;
 
     return Scaffold(
       key: scaffoldKey,
       drawer: const DrawerComponent(),
       body: Stack(
+          clipBehavior: Clip.none,
           alignment: AlignmentDirectional.topStart,
           fit: StackFit.expand,
           children: [
             Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(bg[imgIndex]),
+                  image: AssetImage(bg[context
+                      .watch<BackgroundProvider>()
+                      .currentBackgroundIndex]),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -129,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       padding: const EdgeInsets.all(10),
                       margin: const EdgeInsets.symmetric(horizontal: 16),
                       decoration: BoxDecoration(
-                          color: Colors.black26,
+                          color: Colors.black54,
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadiusDirectional.circular(8)),
                       child: Text(
@@ -177,16 +185,28 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   getPendingTasks() {
-    var tasks = getPendingTasks();
-    if (tasks != null) {
-      return tasks.map((e) => jsonDecode(e));
-    }
+    late List<Map> list;
+
+    AppSharedPreferences.getPendingTasks().then((tasks) {
+      if (tasks != null) {
+        list =
+            tasks.map((e) => jsonDecode(e) as Map<dynamic, dynamic>).toList();
+
+        context.read<TasksProvider>().setPending(list);
+      }
+
+    });
   }
 
   getCompletedTasks() {
-    var tasks = getCompletedTasks();
-    if (tasks != null) {
-      return tasks.map((e) => jsonDecode(e));
-    }
+    late List<Map> list;
+
+    AppSharedPreferences.getCompletedTasks().then((tasks) {
+      if (tasks != null) {
+        list =
+            tasks.map((e) => jsonDecode(e) as Map<dynamic, dynamic>).toList();
+        context.read<TasksProvider>().setCompleted(list);
+      }
+    });
   }
 }

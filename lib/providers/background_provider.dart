@@ -7,10 +7,6 @@ class BackgroundProvider with ChangeNotifier, DiagnosticableTreeMixin {
   int tempBg = 0;
   final bg = constant.wallpaper;
 
-  set setBgIndex(int number) {
-    _currentBackgroundIndex = number;
-  }
-
   int get currentBackgroundIndex => _currentBackgroundIndex;
 
   void changeBackground(int number) {

@@ -6,9 +6,9 @@ import 'package:to_do_app/utilities/app_shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 class TasksProvider with ChangeNotifier {
-  final List<Map> _pendingTasks = [];
+  late List<Map> _pendingTasks = [];
 
-  final List<Map> _completedTasks = [];
+  late List<Map> _completedTasks = [];
 
   bool get hasNoPendingTask => _pendingTasks.isEmpty;
 
@@ -18,11 +18,17 @@ class TasksProvider with ChangeNotifier {
 
   List<Map> get completedTasks => _completedTasks;
 
+  setPending(value){
+    _pendingTasks = value;
+    notifyListeners();
+  }
+
+  setCompleted(value){
+    _completedTasks = value;
+    notifyListeners();
+  }
+
   void addNewTask(String taskContent) {
-    if (kDebugMode) {
-      print('run');
-      print(AppSharedPreferences.getPendingTasks());
-    }
 
     var uuid = const Uuid();
     var task = {};
