@@ -12,6 +12,8 @@ import 'package:to_do_app/providers/background_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 import 'package:to_do_app/utilities/app_shared_preferences.dart';
 
+import 'components/shared/author.dart';
+
 void main() {
   runApp(
     MultiProvider(
@@ -123,7 +125,9 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showAuthorDialog(context);
+                          },
                           icon: const Icon(
                             Icons.info,
                             color: Colors.black,
