@@ -10,4 +10,5 @@ const List<String> wallpaper = [
   "assets/wallpaper/8.jpg",
   "assets/wallpaper/9.jpg",
   "assets/wallpaper/10.jpg",
+  "assets/wallpaper/11.jpg",
 ];
