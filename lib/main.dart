@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/completed.dart';
@@ -57,13 +58,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final bg = constant.wallpaper;
   final TextEditingController _textFieldController = TextEditingController();
-  int imgIndex = 0;
   List<Map> pendingTasks = [];
   List<Map> completedTasks = [];
 
   @override
   void initState() {
     super.initState();
+
     AppSharedPreferences.getBackground().then((value) {
       context.read<BackgroundProvider>().changeBackground(value ?? 0);
     });
@@ -80,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    imgIndex = context.watch<BackgroundProvider>().currentBackgroundIndex;
+
     pendingTasks = context.watch<TasksProvider>().pendingTasks;
     completedTasks = context.watch<TasksProvider>().completedTasks;
 
@@ -194,7 +195,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
         context.read<TasksProvider>().setPending(list);
       }
-
     });
   }
 
