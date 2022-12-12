@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:intl/intl.dart';
 import 'package:to_do_app/utilities/app_shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
@@ -18,40 +17,42 @@ class TasksProvider with ChangeNotifier {
 
   List<Map> get completedTasks => _completedTasks;
 
-  setPending(value){
+  setPending(value) {
     _pendingTasks = value;
     notifyListeners();
   }
 
-  setCompleted(value){
+  setCompleted(value) {
     _completedTasks = value;
     notifyListeners();
   }
 
-  void addNewTask(String taskContent) {
-
+  void addNewTask(String taskContent, String expDate) {
     var uuid = const Uuid();
     var task = {};
     task['id'] = uuid.v1();
     task['taskContent'] = taskContent;
-    task['timeStamp'] = DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now());
+    task['expDate'] = expDate;
 
     _pendingTasks.add(task);
 
+    if (kDebugMode) {
+      print(task);
+    }
     var temp = _pendingTasks.map((e) => jsonEncode(e)).toList();
     AppSharedPreferences.setPendingTasks(temp);
 
     notifyListeners();
   }
 
-  void editPendingTask(int index, String value) {
+  void editPendingTask(int index, String value, String expDate) {
     _pendingTasks.removeAt(index);
 
     var uuid = const Uuid();
     var task = {};
     task['id'] = uuid.v1();
     task['taskContent'] = value;
-    task['timeStamp'] = DateFormat('dd/MM/yyyy HH:mm').format(DateTime.now());
+    task['timeStamp'] = expDate;
 
     _pendingTasks.insert(index, task);
 

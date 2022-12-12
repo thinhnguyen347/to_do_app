@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/shared/alert_dialog.dart';
 import 'package:to_do_app/components/shared/no_task.dart';
@@ -7,6 +8,8 @@ import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class PendingTasks extends StatelessWidget {
   final List<Map> pendingTasks;
+  final String expImg = 'assets/lottie/1574-spa-flower-lineal-edited.json';
+
   const PendingTasks({Key? key, required this.pendingTasks}) : super(key: key);
 
   @override
@@ -64,21 +67,33 @@ class PendingTasks extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: Container(
-                        alignment: Alignment.centerLeft,
-                        width: double.maxFinite,
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                            color: Colors.white70,
-                            borderRadius: BorderRadiusDirectional.circular(8)),
-                        child: Column(
-                          children: [
-                            Text(pendingTasks[index]['taskContent'],
-                                style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w500)),
-                          ],
-                        )),
+                    child: Stack(children: [
+                      Container(
+                          alignment: Alignment.centerLeft,
+                          width: double.maxFinite,
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              color: Colors.white70,
+                              borderRadius:
+                                  BorderRadiusDirectional.circular(8)),
+                          child: Column(
+                            children: [
+                              Text(pendingTasks[index]['taskContent'],
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w500)),
+                            ],
+                          )),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Lottie.asset(
+                          expImg,
+                          width: 40,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ]),
                   ));
             },
           );
@@ -138,7 +153,7 @@ Future<void> displayEditDialog(
                             if (controller.text.isNotEmpty) {
                               context
                                   .read<TasksProvider>()
-                                  .editPendingTask(index, controller.text);
+                                  .editPendingTask(index, controller.text, '');
                               Navigator.pop(context);
                             } else {
                               Navigator.pop(context);

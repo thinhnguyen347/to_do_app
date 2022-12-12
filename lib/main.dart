@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do_app/components/add_new_task.dart';
 import 'package:to_do_app/components/completed.dart';
 import 'package:to_do_app/components/pending.dart';
 import 'package:to_do_app/components/shared/drawer.dart';
-import 'package:to_do_app/components/shared/new_task_dialog.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 import 'package:to_do_app/providers/active_tab_provider.dart';
 import 'package:to_do_app/providers/background_provider.dart';
@@ -59,7 +59,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final bg = constant.wallpaper;
-  final TextEditingController _textFieldController = TextEditingController();
   List<Map> pendingTasks = [];
   List<Map> completedTasks = [];
 
@@ -172,8 +171,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // This trailing comma makes auto-formatting nicer for build methods
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _textFieldController.clear();
-          _displayTextInputDialog(context);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddNewTask()));
         },
         backgroundColor: Colors.white54,
         child: const Icon(Icons.add),
@@ -181,13 +180,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Future<void> _displayTextInputDialog(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return NewTaskDialog(controller: _textFieldController);
-        });
-  }
+  // Future<void> _displayTextInputDialog(BuildContext context) async {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return NewTaskDialog(controller: _textFieldController);
+  //       });
+  // }
 
   getPendingTasks() {
     late List<Map> list;
