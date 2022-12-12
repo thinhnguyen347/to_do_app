@@ -49,7 +49,7 @@ class _AddNewTaskState extends State<AddNewTask> {
           child: AppBar(
             title: const Text('Add new task'),
             centerTitle: true,
-            backgroundColor: Colors.black38,
+            backgroundColor: Colors.black54,
           ),
         ),
         body: Stack(
@@ -74,13 +74,14 @@ class _AddNewTaskState extends State<AddNewTask> {
                 ),
               ),
             ),
-            Padding(
+            SafeArea(
+                child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 60),
+                  const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -210,7 +211,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                   )
                 ],
               ),
-            )
+            )),
           ],
         ));
   }

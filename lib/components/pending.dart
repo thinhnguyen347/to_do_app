@@ -88,11 +88,11 @@ class PendingTasks extends StatelessWidget {
                         top: 0,
                         right: 0,
                         child: Lottie.asset(
-                          expImg,
-                          width: 40,
-                          fit: BoxFit.fill,
+                            expImg,
+                            width: 40,
+                            fit: BoxFit.fill,
+                          ),
                         ),
-                      ),
                     ]),
                   ));
             },
