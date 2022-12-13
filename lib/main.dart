@@ -180,14 +180,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  // Future<void> _displayTextInputDialog(BuildContext context) async {
-  //   return showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return NewTaskDialog(controller: _textFieldController);
-  //       });
-  // }
-
   getPendingTasks() {
     late List<Map> list;
 
