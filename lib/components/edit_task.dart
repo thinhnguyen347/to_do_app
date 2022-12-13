@@ -7,14 +7,23 @@ import 'package:to_do_app/data/constants.dart' as constant;
 import 'package:to_do_app/providers/background_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 
-class AddNewTask extends StatefulWidget {
-  const AddNewTask({Key? key}) : super(key: key);
+class EditTask extends StatefulWidget {
+  const EditTask(
+      {Key? key,
+      required this.index,
+      required this.oldContent,
+      required this.oldExpDate})
+      : super(key: key);
+
+  final int index;
+  final String oldContent;
+  final String oldExpDate;
 
   @override
-  State<AddNewTask> createState() => _AddNewTaskState();
+  State<EditTask> createState() => _EditTaskState();
 }
 
-class _AddNewTaskState extends State<AddNewTask> {
+class _EditTaskState extends State<EditTask> {
   TextEditingController textFieldController = TextEditingController();
   TextEditingController dateFieldController = TextEditingController();
 
@@ -27,9 +36,15 @@ class _AddNewTaskState extends State<AddNewTask> {
   void initState() {
     isEmptyTask = false;
     isEmptyDate = false;
-    isChecked = false;
-    dateFieldController.text = '';
-    textFieldController.text = '';
+
+    dateFieldController.text = widget.oldExpDate;
+    textFieldController.text = widget.oldContent;
+    if (widget.oldExpDate.isNotEmpty) {
+      isChecked = true;
+    } else {
+      isChecked = false;
+    }
+    ;
     super.initState();
   }
 
@@ -47,7 +62,7 @@ class _AddNewTaskState extends State<AddNewTask> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: AppBar(
-            title: const Text('Add new task'),
+            title: const Text('Edit a task'),
             centerTitle: true,
             backgroundColor: Colors.black54,
           ),
@@ -134,7 +149,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                         },
                       ),
                       const SizedBox(width: 12),
-                      const Text('Add expiration date',
+                      const Text('Adjust expiration date',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w400))
                     ],
@@ -146,7 +161,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                           keyboardType: TextInputType.datetime,
                           readOnly: true,
                           decoration: const InputDecoration(
-                            labelText: "Please enter expiration date",
+                            labelText: "New expiration date",
                             filled: true,
                             fillColor: Colors.white,
                           ),
@@ -172,7 +187,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                                 dateFieldController.text = formattedDate;
                               });
                             } else {
-                              dateFieldController.text = '';
+                              dateFieldController.text = widget.oldExpDate;
                             }
                           },
                         )
@@ -201,7 +216,8 @@ class _AddNewTaskState extends State<AddNewTask> {
                                 color: Colors.white, fontSize: 18)),
                         child: const Text('Add'),
                         onPressed: () {
-                          context.read<TasksProvider>().addNewTask(
+                          context.read<TasksProvider>().editPendingTask(
+                              widget.index,
                               textFieldController.text,
                               dateFieldController.text);
                           Navigator.pop(context);

@@ -52,7 +52,7 @@ class TasksProvider with ChangeNotifier {
     var task = {};
     task['id'] = uuid.v1();
     task['taskContent'] = value;
-    task['timeStamp'] = expDate;
+    task['expDate'] = expDate;
 
     _pendingTasks.insert(index, task);
 

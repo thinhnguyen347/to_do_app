@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/add_new_task.dart';
 import 'package:to_do_app/components/completed.dart';
@@ -61,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final bg = constant.wallpaper;
   List<Map> pendingTasks = [];
   List<Map> completedTasks = [];
+  final today = DateFormat('dd-MM-yyyy').format(DateTime.now());
 
   @override
   void initState() {
@@ -157,9 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Flexible(
                     fit: FlexFit.tight,
                     child: context.watch<ActiveTabProvider>().activeTaskTab == 0
-                        ? PendingTasks(
-                            pendingTasks: pendingTasks,
-                          )
+                        ? PendingTasks(pendingTasks: pendingTasks, today: today)
                         : CompletedTasks(
                             completedTasks: completedTasks,
                           ),
