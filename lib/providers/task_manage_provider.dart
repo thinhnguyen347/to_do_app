@@ -36,9 +36,6 @@ class TasksProvider with ChangeNotifier {
 
     _pendingTasks.add(task);
 
-    if (kDebugMode) {
-      print(task);
-    }
     var temp = _pendingTasks.map((e) => jsonEncode(e)).toList();
     AppSharedPreferences.setPendingTasks(temp);
 

@@ -146,7 +146,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                           keyboardType: TextInputType.datetime,
                           readOnly: true,
                           decoration: const InputDecoration(
-                            labelText: "Please enter expiration date",
+                            // labelText: "Please enter expiration date",
                             filled: true,
                             fillColor: Colors.white,
                           ),

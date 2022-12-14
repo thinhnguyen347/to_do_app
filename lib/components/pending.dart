@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/edit_task.dart';
@@ -8,8 +9,10 @@ import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class PendingTasks extends StatelessWidget {
   final List<Map> pendingTasks;
-  final String expImg = 'assets/lottie/1574-spa-flower-lineal-edited.json';
+
   final String today;
+  final String inTimeTaskLottie = 'assets/lottie/wavey-birdie.json';
+  final String lateTaskLottie = 'assets/lottie/12508-exclamation.json';
 
   const PendingTasks(
       {Key? key, required this.pendingTasks, required this.today})
@@ -81,33 +84,63 @@ class PendingTasks extends StatelessWidget {
                       Container(
                           alignment: Alignment.centerLeft,
                           width: double.maxFinite,
-                          padding: const EdgeInsets.all(16),
+                          padding: const EdgeInsets.all(10),
                           decoration: BoxDecoration(
                               color: Colors.white70,
                               borderRadius:
                                   BorderRadiusDirectional.circular(8)),
-                          child: Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(pendingTasks[index]['taskContent'],
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500)),
+                              Flexible(
+                                child: Text(pendingTasks[index]['taskContent'],
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w500)),
+                              ),
+                              updateNotiImage(today,
+                                          pendingTasks[index]['expDate']) ==
+                                      'intime'
+                                  ? Lottie.asset(
+                                      inTimeTaskLottie,
+                                      width: 40,
+                                      fit: BoxFit.fill,
+                                    )
+                                  : updateNotiImage(today,
+                                              pendingTasks[index]['expDate']) ==
+                                          'late'
+                                      ? Row(children: [
+                                          const SizedBox(width: 10),
+                                          Image.asset(
+                                            'assets/images/warning.png',
+                                            width: 20,
+                                          ),
+                                        ])
+                                      : const SizedBox(width: 0),
                             ],
                           )),
-                      today == pendingTasks[index]['expDate']
-                          ? Positioned(
-                              top: 0,
-                              right: 0,
-                              child: Lottie.asset(
-                                expImg,
-                                width: 40,
-                                fit: BoxFit.fill,
-                              ),
-                            )
-                          : Container(),
                     ]),
                   ));
             },
           );
+  }
+
+  String updateNotiImage(String today, String expDate) {
+    if (expDate.isEmpty) {
+      return '';
+    }
+
+    if (today == expDate) {
+      return 'intime';
+    }
+
+    if (DateFormat('yyyy-MM-dd')
+        .parse(today)
+        .isBefore(DateFormat('yyyy-MM-dd').parse(expDate))) {
+      return 'late';
+    }
+
+    return '';
   }
 }

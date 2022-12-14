@@ -28,7 +28,9 @@ class _EditTaskState extends State<EditTask> {
   TextEditingController dateFieldController = TextEditingController();
 
   static const bg = constant.wallpaper;
-  late bool isChecked;
+  late bool isModifyChecked;
+  late bool isRemoveChecked;
+
   late bool isEmptyTask;
   late bool isEmptyDate;
 
@@ -36,15 +38,14 @@ class _EditTaskState extends State<EditTask> {
   void initState() {
     isEmptyTask = false;
     isEmptyDate = false;
-
+    isRemoveChecked = false;
     dateFieldController.text = widget.oldExpDate;
     textFieldController.text = widget.oldContent;
     if (widget.oldExpDate.isNotEmpty) {
-      isChecked = true;
+      isModifyChecked = true;
     } else {
-      isChecked = false;
+      isModifyChecked = false;
     }
-    ;
     super.initState();
   }
 
@@ -141,21 +142,49 @@ class _EditTaskState extends State<EditTask> {
                     children: [
                       Checkbox(
                         checkColor: Colors.white,
-                        value: isChecked,
+                        value: isRemoveChecked,
                         onChanged: (bool? value) {
                           setState(() {
-                            isChecked = value!;
+                            isRemoveChecked = value!;
+
+                            if (isRemoveChecked) {
+                              isModifyChecked = false;
+                              dateFieldController.text = '';
+                            }
                           });
                         },
                       ),
                       const SizedBox(width: 12),
-                      const Text('Adjust expiration date',
+                      const Text('Remove expiration date',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w400))
                     ],
                   ),
                   const SizedBox(height: 10),
-                  isChecked
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Checkbox(
+                        checkColor: Colors.white,
+                        value: isModifyChecked,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isModifyChecked = value!;
+                            if (isModifyChecked) {
+                              isRemoveChecked = false;
+                            }
+                          });
+                        },
+                      ),
+                      const SizedBox(width: 12),
+                      const Text('Modify expiration date',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w400))
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  isModifyChecked
                       ? TextField(
                           controller: dateFieldController,
                           keyboardType: TextInputType.datetime,
@@ -191,7 +220,7 @@ class _EditTaskState extends State<EditTask> {
                             }
                           },
                         )
-                      : const SizedBox(height: 20),
+                      : const SizedBox(height: 10),
                   const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -214,7 +243,7 @@ class _EditTaskState extends State<EditTask> {
                             backgroundColor: Colors.green,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
-                        child: const Text('Add'),
+                        child: const Text('Update'),
                         onPressed: () {
                           context.read<TasksProvider>().editPendingTask(
                               widget.index,
