@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 Widget noTask(int screenCode) {
-  String url = screenCode == 0
-      ? 'assets/lottie/cycle-rider.json'
-      : 'assets/lottie/105599-moody-dog.json';
+  String url = 'assets/lottie/105599-moody-dog.json';
   String message = screenCode == 0 ? 'pending' : 'completed';
 
   return Center(
