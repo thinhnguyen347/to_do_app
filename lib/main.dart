@@ -69,10 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 5), () {
-      FlutterNativeSplash.remove();
-    });
-
+    super.initState();
     AppSharedPreferences.getBackground().then((value) {
       context.read<BackgroundProvider>().changeBackground(value ?? 0);
     });
@@ -80,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
     getPendingTasks();
     getCompletedTasks();
 
-    super.initState();
+    FlutterNativeSplash.remove();
   }
 
   @override

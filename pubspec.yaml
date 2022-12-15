@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_native_splash: ^2.2.16
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -40,7 +42,6 @@ dependencies:
   provider: ^6.0.4
   uuid: ^3.0.6
   intl: ^0.17.0
-  flutter_native_splash: ^2.2.16
 
 
 dev_dependencies:
@@ -92,30 +93,11 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 
 flutter_native_splash:
-  background_image: "assets/images/z395.jpg"
-
+  background_image: "assets/images/palm1.jpg"
+  image: "assets/images/1526.png"
   android_12:
-  # The image parameter sets the splash screen icon image.  If this parameter is not specified,
-  # the app's launcher icon will be used instead.
-  # Please note that the splash screen will be clipped to a circle on the center of the screen.
-  # App icon with an icon background: This should be 960×960 pixels, and fit within a circle
-  # 640 pixels in diameter.
-  # App icon without an icon background: This should be 1152×1152 pixels, and fit within a circle
-  # 768 pixels in diameter.
-  image: assets/images/z395.jpg
-
-  # Splash screen background color.
-  #color: "#42a5f5"
-
-  # App icon background color.
-  #icon_background_color: "#111111"
-
-  # The branding property allows you to specify an image used as branding in the splash screen.
-  #branding: assets/dart.png
-
-  # The image_dark, color_dark, icon_background_color_dark, and branding_dark set values that
-  # apply when the device is in dark mode. If they are not specified, the app will use the
-  # parameters from above.
-  #image_dark: assets/android12splash-invert.png
-  #color_dark: "#042a49"
-  #icon_background_color_dark: "#eeeeee"
+    image: "assets/images/1526.png"
+    color: "#a82248"
+  android: true
+  ios: true
+  web: false

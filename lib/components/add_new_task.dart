@@ -196,15 +196,19 @@ class _AddNewTaskState extends State<AddNewTask> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             fixedSize: const Size(100, 40),
-                            backgroundColor: Colors.green,
+                            backgroundColor: textFieldController.text.isEmpty
+                                ? Colors.grey
+                                : Colors.green,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
                         child: const Text('Add'),
                         onPressed: () {
-                          context.read<TasksProvider>().addNewTask(
-                              textFieldController.text,
-                              dateFieldController.text);
-                          Navigator.pop(context);
+                          if (textFieldController.text.isNotEmpty) {
+                            context.read<TasksProvider>().addNewTask(
+                                textFieldController.text,
+                                dateFieldController.text);
+                            Navigator.pop(context);
+                          }
                         },
                       ),
                     ],

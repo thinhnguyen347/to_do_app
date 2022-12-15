@@ -240,16 +240,20 @@ class _EditTaskState extends State<EditTask> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             fixedSize: const Size(100, 40),
-                            backgroundColor: Colors.green,
+                            backgroundColor: textFieldController.text.isEmpty
+                                ? Colors.grey
+                                : Colors.green,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
                         child: const Text('Update'),
                         onPressed: () {
-                          context.read<TasksProvider>().editPendingTask(
-                              widget.index,
-                              textFieldController.text,
-                              dateFieldController.text);
-                          Navigator.pop(context);
+                          if (textFieldController.text.isNotEmpty) {
+                            context.read<TasksProvider>().editPendingTask(
+                                widget.index,
+                                textFieldController.text,
+                                dateFieldController.text);
+                            Navigator.pop(context);
+                          }
                         },
                       ),
                     ],
