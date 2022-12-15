@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do_app/components/shared/alert_dialog.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 import 'package:to_do_app/providers/background_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
@@ -133,7 +134,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                           });
                         },
                       ),
-                      const SizedBox(width: 12),
+                      const SizedBox(width: 8),
                       const Text('Add expiration date',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w400))
@@ -196,9 +197,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             fixedSize: const Size(100, 40),
-                            backgroundColor: textFieldController.text.isEmpty
-                                ? Colors.grey
-                                : Colors.green,
+                            backgroundColor: Colors.green,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
                         child: const Text('Add'),
@@ -208,6 +207,9 @@ class _AddNewTaskState extends State<AddNewTask> {
                                 textFieldController.text,
                                 dateFieldController.text);
                             Navigator.pop(context);
+                          } else {
+                            showInfoDialog(
+                                context, 'Please fill in task content!', true);
                           }
                         },
                       ),

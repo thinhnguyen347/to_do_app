@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:to_do_app/components/shared/alert_dialog.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 import 'package:to_do_app/providers/background_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
@@ -253,6 +254,9 @@ class _EditTaskState extends State<EditTask> {
                                 textFieldController.text,
                                 dateFieldController.text);
                             Navigator.pop(context);
+                          } else {
+                            showInfoDialog(
+                                context, 'Please fill in task content!', true);
                           }
                         },
                       ),
