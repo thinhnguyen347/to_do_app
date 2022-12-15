@@ -137,7 +137,7 @@ class PendingTasks extends StatelessWidget {
 
     if (DateFormat('yyyy-MM-dd')
         .parse(today)
-        .isBefore(DateFormat('yyyy-MM-dd').parse(expDate))) {
+        .isAfter(DateFormat('yyyy-MM-dd').parse(expDate))) {
       return 'late';
     }
 
