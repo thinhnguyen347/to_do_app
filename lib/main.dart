@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/add_new_task.dart';
@@ -16,6 +17,8 @@ import 'package:to_do_app/utilities/app_shared_preferences.dart';
 import 'components/shared/author.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(
     MultiProvider(
       providers: [
@@ -66,7 +69,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    super.initState();
+    Future.delayed(const Duration(seconds: 5), () {
+      FlutterNativeSplash.remove();
+    });
 
     AppSharedPreferences.getBackground().then((value) {
       context.read<BackgroundProvider>().changeBackground(value ?? 0);
@@ -74,6 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     getPendingTasks();
     getCompletedTasks();
+
+    super.initState();
   }
 
   @override
