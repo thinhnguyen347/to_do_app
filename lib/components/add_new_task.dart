@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/components/shared/alert_dialog.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:to_do_app/components/shared/dialog.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 import 'package:to_do_app/providers/background_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
@@ -39,6 +40,16 @@ class _AddNewTaskState extends State<AddNewTask> {
     textFieldController.dispose();
     dateFieldController.dispose();
     super.dispose();
+  }
+
+  onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
+    setState(() {
+      if (args.value is DateTime) {
+        String formattedDate = DateFormat('dd-MM-yyyy').format(args.value);
+        dateFieldController.text = formattedDate;
+      }
+    });
+    Navigator.pop(context);
   }
 
   @override
@@ -103,14 +114,13 @@ class _AddNewTaskState extends State<AddNewTask> {
                     autofocus: true,
                     minLines: 5,
                     maxLines: 10,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       filled: true,
                       fillColor: Colors.white,
-                      errorText: isEmptyTask ? 'Empty task!' : '',
-                      errorStyle: const TextStyle(
-                          color: Colors.red,
-                          fontSize: 12,
-                          fontStyle: FontStyle.italic),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                        gapPadding: 4.0,
+                      ),
                     ),
                     onChanged: (value) {
                       if (value.isEmpty) {
@@ -150,6 +160,11 @@ class _AddNewTaskState extends State<AddNewTask> {
                             // labelText: "Please enter expiration date",
                             filled: true,
                             fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16.0)),
+                              gapPadding: 4.0,
+                            ),
                           ),
                           onChanged: (value) {
                             if (value.isEmpty) {
@@ -158,24 +173,24 @@ class _AddNewTaskState extends State<AddNewTask> {
                               isEmptyDate = false;
                             }
                           },
-                          onTap: () async {
-                            DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2101));
-
-                            if (pickedDate != null) {
-                              String formattedDate =
-                                  DateFormat('dd-MM-yyyy').format(pickedDate);
-
-                              setState(() {
-                                dateFieldController.text = formattedDate;
-                              });
-                            } else {
-                              dateFieldController.text = '';
-                            }
-                          },
+                          onTap: () => showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SfDateRangePicker(
+                                        onSelectionChanged: onSelectionChanged,
+                                        enablePastDates: false,
+                                        selectionMode:
+                                            DateRangePickerSelectionMode.single,
+                                        initialSelectedDate: DateTime.now(),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }),
                         )
                       : const SizedBox(height: 20),
                   const SizedBox(height: 20),
@@ -221,4 +236,22 @@ class _AddNewTaskState extends State<AddNewTask> {
           ],
         ));
   }
+
+// openDatepicker() async {
+//   DateTime? pickedDate = await showDatePicker(
+//       context: context,
+//       initialDate: DateTime.now(),
+//       firstDate: DateTime.now(),
+//       lastDate: DateTime(2101));
+//
+//   if (pickedDate != null) {
+//     String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
+//
+//     setState(() {
+//       dateFieldController.text = formattedDate;
+//     });
+//   } else {
+//     dateFieldController.text = '';
+//   }
+// }
 }

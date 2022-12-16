@@ -29,7 +29,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_native_splash: ^2.2.16
 
 
 
@@ -42,6 +41,7 @@ dependencies:
   provider: ^6.0.4
   uuid: ^3.0.6
   intl: ^0.17.0
+  syncfusion_flutter_datepicker: ^20.3.61
 
 
 dev_dependencies:
@@ -92,12 +92,3 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 
-flutter_native_splash:
-  background_image: "assets/wallpaper/6.jpg"
-  image: "assets/images/1526.png"
-  android_12:
-    image: "assets/images/1526.png"
-    color: "#a82248"
-  android: true
-  ios: true
-  web: false

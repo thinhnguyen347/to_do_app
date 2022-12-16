@@ -1,26 +1,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void showAuthorDialog(BuildContext context) =>
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CupertinoAlertDialog(
-            title: const Text("App info"),
-            content: Column(
-              children: const [
-                Text("Author: Thinh Nguyen"),
-                Text("Contact: nd.thinh91@gmail.com"),
-              ],
+void showAuthorDialog(BuildContext context) => showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return CupertinoAlertDialog(
+        title: const Text("Application info"),
+        content: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            SizedBox(
+              height: 16,
             ),
-            actions: [
-              CupertinoDialogAction(
-                isDefaultAction: true,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Close'),
-              ),
-            ],
-          );
-        });
+            Text("Author: Thinh Nguyen"),
+            Text("Email contact: nd.thinh91@gmail.com"),
+            Text("Phone/ Zalo: 0984018891"),
+          ],
+        ),
+        actions: [
+          CupertinoDialogAction(
+            isDefaultAction: true,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Close'),
+          ),
+        ],
+      );
+    });

@@ -12,7 +12,6 @@ class PendingTasks extends StatelessWidget {
 
   final String today;
   final String inTimeTaskLottie = 'assets/lottie/wavey-birdie.json';
-  final String lateTaskLottie = 'assets/lottie/12508-exclamation.json';
 
   const PendingTasks(
       {Key? key, required this.pendingTasks, required this.today})
@@ -46,7 +45,8 @@ class PendingTasks extends StatelessWidget {
                                         oldContent: pendingTasks[index]
                                             ['taskContent'],
                                         oldExpDate: pendingTasks[index]
-                                            ['expDate'] ?? '')));
+                                                ['expDate'] ??
+                                            '')));
                           },
                           backgroundColor: const Color(0xFF7BC043),
                           foregroundColor: Colors.white,

@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/components/shared/alert_dialog.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:to_do_app/components/shared/dialog.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 import 'package:to_do_app/providers/background_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
@@ -48,6 +49,16 @@ class _EditTaskState extends State<EditTask> {
       isModifyChecked = false;
     }
     super.initState();
+  }
+
+  onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
+    setState(() {
+      if (args.value is DateTime) {
+        String formattedDate = DateFormat('dd-MM-yyyy').format(args.value);
+        dateFieldController.text = formattedDate;
+      }
+    });
+    Navigator.pop(context);
   }
 
   @override
@@ -202,24 +213,24 @@ class _EditTaskState extends State<EditTask> {
                               isEmptyDate = false;
                             }
                           },
-                          onTap: () async {
-                            DateTime? pickedDate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2101));
-
-                            if (pickedDate != null) {
-                              String formattedDate =
-                                  DateFormat('dd-MM-yyyy').format(pickedDate);
-
-                              setState(() {
-                                dateFieldController.text = formattedDate;
-                              });
-                            } else {
-                              dateFieldController.text = widget.oldExpDate;
-                            }
-                          },
+                          onTap: () => showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      SfDateRangePicker(
+                                        onSelectionChanged: onSelectionChanged,
+                                        enablePastDates: false,
+                                        selectionMode:
+                                            DateRangePickerSelectionMode.single,
+                                        initialSelectedDate: DateTime.now(),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }),
                         )
                       : const SizedBox(height: 10),
                   const SizedBox(height: 20),
