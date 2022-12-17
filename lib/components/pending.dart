@@ -117,7 +117,7 @@ class PendingTasks extends StatelessWidget {
                                             width: 20,
                                           ),
                                         ])
-                                      : const SizedBox(width: 0),
+                                      : const SizedBox(height: 30),
                             ],
                           )),
                     ]),

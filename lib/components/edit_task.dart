@@ -146,7 +146,7 @@ class _EditTaskState extends State<EditTask> {
                     },
                   ),
                   const SizedBox(height: 16),
-                  Row(
+                  widget.oldExpDate.isNotEmpty ? Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -169,7 +169,7 @@ class _EditTaskState extends State<EditTask> {
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w400))
                     ],
-                  ),
+                  ) : const SizedBox(height: 0),
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
