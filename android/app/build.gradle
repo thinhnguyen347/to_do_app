@@ -71,6 +71,18 @@ android {
         release {
             signingConfig signingConfigs.release
         }
+
+        release {
+            manifestPlaceholders = [applicationName: "android.app.Application"]
+        }
+
+        debug {
+            manifestPlaceholders = [applicationName: "android.app.Application"]
+        }
+
+        build{
+            manifestPlaceholders = [applicationName: "android.app.Application"]
+        }
     }
 }
 
