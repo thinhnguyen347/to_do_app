@@ -130,15 +130,13 @@ class _EditTaskState extends State<EditTask> {
                     autofocus: true,
                     minLines: 5,
                     maxLines: 10,
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: Colors.white,
-                      errorText: isEmptyTask ? 'Empty task!' : '',
-                      errorStyle: const TextStyle(
-                          color: Colors.red,
-                          fontSize: 12,
-                          fontStyle: FontStyle.italic),
-                    ),
+                    decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Colors.white,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                          gapPadding: 4.0,
+                        )),
                     onChanged: (value) {
                       if (value.isEmpty) {
                         isEmptyTask = true;
@@ -202,9 +200,13 @@ class _EditTaskState extends State<EditTask> {
                           keyboardType: TextInputType.datetime,
                           readOnly: true,
                           decoration: const InputDecoration(
-                            labelText: "New expiration date",
                             filled: true,
                             fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16.0)),
+                              gapPadding: 4.0,
+                            ),
                           ),
                           onChanged: (value) {
                             if (value.isEmpty) {
@@ -225,7 +227,7 @@ class _EditTaskState extends State<EditTask> {
                                         enablePastDates: false,
                                         selectionMode:
                                             DateRangePickerSelectionMode.single,
-                                        initialSelectedDate: DateTime.now(),
+                                        initialDisplayDate: DateTime.now(),
                                       ),
                                     ],
                                   ),

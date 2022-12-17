@@ -157,7 +157,6 @@ class _AddNewTaskState extends State<AddNewTask> {
                           keyboardType: TextInputType.datetime,
                           readOnly: true,
                           decoration: const InputDecoration(
-                            // labelText: "Please enter expiration date",
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -185,7 +184,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                                         enablePastDates: false,
                                         selectionMode:
                                             DateRangePickerSelectionMode.single,
-                                        initialSelectedDate: DateTime.now(),
+                                        initialDisplayDate: DateTime.now(),
                                       ),
                                     ],
                                   ),
