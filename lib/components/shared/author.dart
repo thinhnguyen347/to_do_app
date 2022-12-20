@@ -13,9 +13,12 @@ void showAuthorDialog(BuildContext context) => showDialog(
             SizedBox(
               height: 16,
             ),
-            Text("Author: Thinh Nguyen"),
+            Text("Developer: Thinh Nguyen"),
             Text("Email contact: nd.thinh91@gmail.com"),
             Text("Phone/ Zalo: 0984018891"),
+            Text("***"),
+            Text("Icon sources: lottiefiles.com, freepik.com"),
+            Text("Image sources: unsplash.com, wallpapers.com"),
           ],
         ),
         actions: [
