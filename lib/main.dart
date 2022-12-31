@@ -35,10 +35,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My To-Do App',
-      theme: ThemeData(),
-      home: const FlashScreen(),
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 800),
+      child: MaterialApp(
+        title: 'My To-Do App',
+        theme: ThemeData(),
+        home: const FlashScreen(),
+      ),
     );
   }
 }
@@ -72,8 +75,8 @@ class _FlashScreenState extends State<FlashScreen> {
               fit: BoxFit.cover,
             ),
           ),
-          child: Center(child: Image.asset('assets/images/logo.png', width: 200,)
-          ),
+          // child: Center(child: Image.asset('assets/images/logo.png', width: 200,)
+          // ),
         ),
         onDoubleTap: () {
           timer.cancel();

@@ -17,8 +17,8 @@ void showAuthorDialog(BuildContext context) => showDialog(
             Text("Email contact: nd.thinh91@gmail.com"),
             Text("Phone/ Zalo: 0984018891"),
             Text("***"),
-            Text("Icon sources: lottiefiles.com, freepik.com"),
-            Text("Image sources: unsplash.com, wallpapers.com"),
+            Text("Icon sources: lottiefiles.com, freepik.com", textAlign: TextAlign.left,),
+            Text("Image sources: unsplash.com, wallpapers.com", textAlign: TextAlign.left,),
           ],
         ),
         actions: [
