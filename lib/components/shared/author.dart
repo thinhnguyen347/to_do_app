@@ -18,7 +18,7 @@ void showAuthorDialog(BuildContext context) => showDialog(
             Text("Phone/ Zalo: 0984018891"),
             Text("***"),
             Text("Icon sources: lottiefiles.com, freepik.com", textAlign: TextAlign.left,),
-            Text("Image sources: unsplash.com, wallpapers.com", textAlign: TextAlign.left,),
+            Text("Image sources: unsplash.com, wallpapers.com, pexel.com", textAlign: TextAlign.left,),
           ],
         ),
         actions: [
