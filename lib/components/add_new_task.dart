@@ -59,7 +59,7 @@ class _AddNewTaskState extends State<AddNewTask> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: AppBar(
-            title: const Text('Add new task'),
+            title: const Text('Add task'),
             centerTitle: true,
             backgroundColor: Colors.black54,
           ),

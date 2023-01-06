@@ -75,7 +75,7 @@ class _EditTaskState extends State<EditTask> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: AppBar(
-            title: const Text('Edit a task'),
+            title: const Text('Modify task'),
             centerTitle: true,
             backgroundColor: Colors.black54,
           ),
@@ -146,30 +146,32 @@ class _EditTaskState extends State<EditTask> {
                     },
                   ),
                   const SizedBox(height: 16),
-                  widget.oldExpDate.isNotEmpty ? Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Checkbox(
-                        checkColor: Colors.white,
-                        value: isRemoveChecked,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            isRemoveChecked = value!;
+                  widget.oldExpDate.isNotEmpty
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Checkbox(
+                              checkColor: Colors.white,
+                              value: isRemoveChecked,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  isRemoveChecked = value!;
 
-                            if (isRemoveChecked) {
-                              isModifyChecked = false;
-                              dateFieldController.text = '';
-                            }
-                          });
-                        },
-                      ),
-                      const SizedBox(width: 12),
-                      const Text('Remove expiration date',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w400))
-                    ],
-                  ) : const SizedBox(height: 0),
+                                  if (isRemoveChecked) {
+                                    isModifyChecked = false;
+                                    dateFieldController.text = '';
+                                  }
+                                });
+                              },
+                            ),
+                            const SizedBox(width: 12),
+                            const Text('Remove expiration date',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w400))
+                          ],
+                        )
+                      : const SizedBox(height: 0),
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -188,7 +190,7 @@ class _EditTaskState extends State<EditTask> {
                         },
                       ),
                       const SizedBox(width: 12),
-                      const Text('Modify expiration date',
+                      const Text('Adjust expiration date',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w400))
                     ],

@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                           context.watch<ActiveTabProvider>().activeTaskTab == 0
                               ? 'Pending tasks'
-                              : 'Completed Tasks',
+                              : 'Completed tasks',
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                               fontSize: 22,

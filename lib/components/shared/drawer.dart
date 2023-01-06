@@ -45,10 +45,12 @@ class DrawerComponent extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const Divider(),
+              const SizedBox(height: 8),
               const Text(
-                'Change background',
+                'Change app background',
                 style: TextStyle(fontSize: 16),
               ),
+              const SizedBox(height: 8),
               SizedBox(
                 height: 56,
                 width: double.infinity,

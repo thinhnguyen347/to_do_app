@@ -5,7 +5,7 @@ void showAuthorDialog(BuildContext context) => showDialog(
     context: context,
     builder: (BuildContext context) {
       return CupertinoAlertDialog(
-        title: const Text("Application info"),
+        title: const Text("About app"),
         content: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -14,11 +14,21 @@ void showAuthorDialog(BuildContext context) => showDialog(
               height: 16,
             ),
             Text("Developer: Thinh Nguyen"),
-            Text("Email contact: nd.thinh91@gmail.com"),
-            Text("Phone/ Zalo: 0984018891"),
+            Text("Email: nd.thinh91@gmail.com"),
+            // Text("Phone/ Zalo: 0984018891"),
             Text("***"),
-            Text("Icon sources: lottiefiles.com, freepik.com", textAlign: TextAlign.left,),
-            Text("Image sources: unsplash.com, wallpapers.com, pexel.com", textAlign: TextAlign.left,),
+            Text(
+              "Version: 2.0.4",
+              textAlign: TextAlign.left,
+            ),
+            Text(
+              "Icon sources: lottiefiles.com, freepik.com",
+              textAlign: TextAlign.left,
+            ),
+            Text(
+              "Photo sources: unsplash.com, wallpapers.com, pexel.com",
+              textAlign: TextAlign.left,
+            ),
           ],
         ),
         actions: [
