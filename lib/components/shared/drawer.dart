@@ -76,6 +76,66 @@ class DrawerComponent extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(24)),
                           ));
                     }),
+              ),
+              const SizedBox(height: 16),
+              const Divider(),
+              const SizedBox(height: 8),
+              const Text(
+                'Set active language',
+                style: TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: const EdgeInsets.only(top: 3, bottom: 3),
+                        height: 24,
+                        width: 24,
+                        margin: const EdgeInsets.only(right: 8, top: 8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(
+                            color: Colors.black54,
+                            style: BorderStyle.solid,
+                            width: 1,
+                          ),
+                        ),
+                        child: const Text(
+                          'en',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      )),
+                  const SizedBox(width: 16),
+                  GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        padding: const EdgeInsets.only(top: 3, bottom: 3),
+                        height: 24,
+                        width: 24,
+                        margin: const EdgeInsets.only(right: 8, top: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.black54,
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(
+                            color: Colors.black45,
+                            style: BorderStyle.solid,
+                            width: 1,
+                          ),
+                        ),
+                        child: const Text(
+                          'vi',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )),
+                ],
               )
             ])));
   }
