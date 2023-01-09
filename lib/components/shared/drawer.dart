@@ -98,7 +98,7 @@ class DrawerComponent extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(24),
                           border: Border.all(
-                            color: Colors.black54,
+                            color: Colors.transparent,
                             style: BorderStyle.solid,
                             width: 1,
                           ),
