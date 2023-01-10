@@ -1,33 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/data/app_version.dart';
+import 'package:to_do_app/providers/language_provider.dart';
 
 void showAuthorDialog(BuildContext context) => showDialog(
     context: context,
     builder: (BuildContext context) {
+      final lang = context.watch<LanguageProvider>().currentLanguage;
+
       return CupertinoAlertDialog(
-        title: const Text("About app"),
+        title: Text(lang == "en" ? "About app" : "Thông tin ứng dụng"),
         content: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            SizedBox(
+          children: [
+            const SizedBox(
               height: 16,
             ),
-            Text("Developer: Thinh Nguyen"),
-            Text("Email: nd.thinh91@gmail.com"),
+            const Text("Developer: Thinh Nguyen"),
+            const Text("Email: nd.thinh91@gmail.com"),
             // Text("Phone/ Zalo: 0984018891"),
-            Text("***"),
+            const Text("***"),
             Text(
-              "Version: $version",
+              "${lang == "en" ? 'Version' : 'Phiên bản'}: $version",
               textAlign: TextAlign.left,
             ),
             Text(
-              "Icon sources: lottiefiles.com, freepik.com",
+              "${lang == "en" ? 'Icon sources' : 'Nguồn icon'}: lottiefiles.com, freepik.com",
               textAlign: TextAlign.left,
             ),
             Text(
-              "Photo sources: unsplash.com, wallpapers.com, pexel.com",
+              "${lang == "en" ? 'Photo sources' : 'Nguồn ảnh'}: unsplash.com, wallpapers.com, pexel.com",
               textAlign: TextAlign.left,
             ),
           ],
@@ -38,7 +42,7 @@ void showAuthorDialog(BuildContext context) => showDialog(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text('Close'),
+            child: Text(lang == "en" ? 'Close' : 'Đóng'),
           ),
         ],
       );

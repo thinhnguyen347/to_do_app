@@ -7,6 +7,7 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:to_do_app/components/shared/dialog.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 import 'package:to_do_app/providers/background_provider.dart';
+import 'package:to_do_app/providers/language_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class AddNewTask extends StatefulWidget {
@@ -54,12 +55,14 @@ class _AddNewTaskState extends State<AddNewTask> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LanguageProvider>().currentLanguage;
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: AppBar(
-            title: const Text('Add task'),
+            title: Text(lang == 'en' ? 'Add task' : 'Thêm công việc'),
             centerTitle: true,
             backgroundColor: Colors.black54,
           ),
@@ -97,12 +100,15 @@ class _AddNewTaskState extends State<AddNewTask> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.edit,
+                    children: [
+                      const Icon(Icons.edit,
                           size: 24, color: Colors.lightGreenAccent),
-                      SizedBox(width: 10),
-                      Text('Task content:',
-                          style: TextStyle(
+                      const SizedBox(width: 10),
+                      Text(
+                          lang == 'en'
+                              ? 'Task content:'
+                              : 'Nội dung công việc:',
+                          style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500))
                     ],
                   ),
@@ -145,8 +151,11 @@ class _AddNewTaskState extends State<AddNewTask> {
                         },
                       ),
                       const SizedBox(width: 8),
-                      const Text('Add expiration date',
-                          style: TextStyle(
+                      Text(
+                          lang == 'en'
+                              ? 'Add expiration date'
+                              : 'Thêm ngày hết hạn',
+                          style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w400))
                     ],
                   ),
@@ -199,22 +208,22 @@ class _AddNewTaskState extends State<AddNewTask> {
                     children: [
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(100, 40),
+                            fixedSize: const Size(120, 40),
                             backgroundColor: Colors.red,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
-                        child: const Text('Cancel'),
+                        child: Text(lang == 'en' ? 'Cancel' : 'Huỷ bỏ'),
                         onPressed: () {
                           Navigator.pop(context);
                         },
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(100, 40),
+                            fixedSize: const Size(120, 40),
                             backgroundColor: Colors.green,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
-                        child: const Text('Add'),
+                        child: Text(lang == 'en' ? 'Add' : 'Thêm mới'),
                         onPressed: () {
                           if (textFieldController.text.isNotEmpty) {
                             context.read<TasksProvider>().addNewTask(
@@ -223,7 +232,11 @@ class _AddNewTaskState extends State<AddNewTask> {
                             Navigator.pop(context);
                           } else {
                             showInfoDialog(
-                                context, 'Please fill in task content!', true);
+                                context,
+                                lang == 'en'
+                                    ? 'Please fill in task content!'
+                                    : 'Vui lòng điền nội dung công việc!',
+                                true);
                           }
                         },
                       ),
@@ -235,22 +248,4 @@ class _AddNewTaskState extends State<AddNewTask> {
           ],
         ));
   }
-
-// openDatepicker() async {
-//   DateTime? pickedDate = await showDatePicker(
-//       context: context,
-//       initialDate: DateTime.now(),
-//       firstDate: DateTime.now(),
-//       lastDate: DateTime(2101));
-//
-//   if (pickedDate != null) {
-//     String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
-//
-//     setState(() {
-//       dateFieldController.text = formattedDate;
-//     });
-//   } else {
-//     dateFieldController.text = '';
-//   }
-// }
 }

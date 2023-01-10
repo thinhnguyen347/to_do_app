@@ -30,4 +30,14 @@ class AppSharedPreferences {
     final preferences = await SharedPreferences.getInstance();
     return preferences.getInt('background');
   }
+
+  static Future<String?> getLanguage() async {
+    final preferences = await SharedPreferences.getInstance();
+    return preferences.getString('language');
+  }
+
+  static setLanguage(String language) async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.setString('language', language);
+  }
 }

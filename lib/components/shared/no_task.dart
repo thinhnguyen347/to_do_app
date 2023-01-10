@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-Widget noTask(int screenCode) {
+Widget noTask(int screenCode, String lang) {
   String url = 'assets/lottie/105599-moody-dog.json';
-  // String message = screenCode == 0 ? 'pending' : 'completed';
 
   return Center(
     child: Column(
@@ -24,8 +23,9 @@ Widget noTask(int screenCode) {
                 color: Colors.black54,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadiusDirectional.circular(8)),
-            child: const Text('No task available!',
-                style: TextStyle(fontSize: 18, color: Colors.white)))
+            child: Text(
+                lang == 'en' ? 'No task available!' : 'Không có dữ liệu!',
+                style: const TextStyle(fontSize: 18, color: Colors.white)))
       ],
     ),
   );

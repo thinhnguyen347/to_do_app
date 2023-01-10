@@ -11,6 +11,7 @@ import 'package:to_do_app/components/shared/drawer.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 import 'package:to_do_app/providers/active_tab_provider.dart';
 import 'package:to_do_app/providers/background_provider.dart';
+import 'package:to_do_app/providers/language_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 import 'package:to_do_app/utilities/app_shared_preferences.dart';
 
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
 
     getPendingTasks();
     getCompletedTasks();
+    getLanguage();
   }
 
   @override
@@ -49,6 +51,7 @@ class _HomePageState extends State<HomePage> {
 
     pendingTasks = context.watch<TasksProvider>().pendingTasks;
     completedTasks = context.watch<TasksProvider>().completedTasks;
+    final lang = context.watch<LanguageProvider>().currentLanguage;
 
     return Scaffold(
       key: scaffoldKey,
@@ -108,15 +111,31 @@ class _HomePageState extends State<HomePage> {
                           color: Colors.black54,
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadiusDirectional.circular(8)),
-                      child: Text(
-                          context.watch<ActiveTabProvider>().activeTaskTab == 0
-                              ? 'Pending tasks'
-                              : 'Completed tasks',
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontSize: 22,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold))),
+                      child: lang == 'en'
+                          ? Text(
+                              context
+                                          .watch<ActiveTabProvider>()
+                                          .activeTaskTab ==
+                                      0
+                                  ? 'Pending tasks'
+                                  : 'Completed tasks',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold))
+                          : Text(
+                              context
+                                          .watch<ActiveTabProvider>()
+                                          .activeTaskTab ==
+                                      0
+                                  ? 'Công việc chờ xử lý'
+                                  : 'Công việc đã hoàn thành',
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold))),
                   const SizedBox(height: 16),
                   Flexible(
                     fit: FlexFit.tight,
@@ -164,6 +183,12 @@ class _HomePageState extends State<HomePage> {
             tasks.map((e) => jsonDecode(e) as Map<dynamic, dynamic>).toList();
         context.read<TasksProvider>().setCompleted(list);
       }
+    });
+  }
+
+  getLanguage() {
+    AppSharedPreferences.getLanguage().then((language) {
+      context.read<LanguageProvider>().setCurrentLanguage(language ?? 'en');
     });
   }
 }

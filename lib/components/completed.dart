@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/shared/no_task.dart';
+import 'package:to_do_app/providers/language_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class CompletedTasks extends StatelessWidget {
   final List<Map> completedTasks;
-  const CompletedTasks({Key? key, required this.completedTasks}) : super(key: key);
+  const CompletedTasks({Key? key, required this.completedTasks})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LanguageProvider>().currentLanguage;
     return completedTasks.isEmpty
-        ? noTask(1)
+        ? noTask(1, lang)
         : ListView.builder(
             scrollDirection: Axis.vertical,
             itemCount: completedTasks.length,

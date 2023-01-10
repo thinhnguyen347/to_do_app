@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:to_do_app/components/home.dart';
 import 'package:to_do_app/providers/active_tab_provider.dart';
 import 'package:to_do_app/providers/background_provider.dart';
+import 'package:to_do_app/providers/language_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 
 void main() {
@@ -21,6 +22,10 @@ void main() {
         ),
         ChangeNotifierProvider(
           create: (_) => TasksProvider(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LanguageProvider(),
           lazy: false,
         ),
       ],
