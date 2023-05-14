@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../data/constants.dart';
+
 void showAuthorDialog(BuildContext context) => showDialog(
     context: context,
     builder: (BuildContext context) {
       return CupertinoAlertDialog(
         title: const Text("About app"),
-        content: Column(
+        content: const Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             SizedBox(
               height: 16,
             ),
@@ -18,7 +20,7 @@ void showAuthorDialog(BuildContext context) => showDialog(
             // Text("Phone/ Zalo: 0984018891"),
             Text("***"),
             Text(
-              "Version: 2.0.4",
+              "Version: $appVersion",
               textAlign: TextAlign.left,
             ),
             Text(
