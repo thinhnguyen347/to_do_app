@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/components/edit_task.dart';
 import 'package:to_do_app/components/shared/no_task.dart';
+import 'package:to_do_app/providers/language_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class PendingTasks extends StatelessWidget {
@@ -19,8 +20,10 @@ class PendingTasks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LanguageProvider>().currentLanguage;
+
     return pendingTasks.isEmpty
-        ? noTask(0)
+        ? noTask(0, lang)
         : ListView.builder(
             scrollDirection: Axis.vertical,
             itemCount: pendingTasks.length,

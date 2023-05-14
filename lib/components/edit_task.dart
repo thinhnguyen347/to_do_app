@@ -7,6 +7,7 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:to_do_app/components/shared/dialog.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 import 'package:to_do_app/providers/background_provider.dart';
+import 'package:to_do_app/providers/language_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class EditTask extends StatefulWidget {
@@ -48,6 +49,7 @@ class _EditTaskState extends State<EditTask> {
     } else {
       isModifyChecked = false;
     }
+
     super.initState();
   }
 
@@ -70,12 +72,13 @@ class _EditTaskState extends State<EditTask> {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LanguageProvider>().currentLanguage;
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: AppBar(
-            title: const Text('Modify task'),
+            title: Text(lang == 'en' ? 'Modify task' : 'Chỉnh sửa công việc'),
             centerTitle: true,
             backgroundColor: Colors.black54,
           ),
@@ -113,12 +116,15 @@ class _EditTaskState extends State<EditTask> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.edit,
+                    children: [
+                      const Icon(Icons.edit,
                           size: 24, color: Colors.lightGreenAccent),
-                      SizedBox(width: 10),
-                      Text('Task content:',
-                          style: TextStyle(
+                      const SizedBox(width: 10),
+                      Text(
+                          lang == 'en'
+                              ? 'Task content:'
+                              : 'Nội dung công việc:',
+                          style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500))
                     ],
                   ),
@@ -166,8 +172,11 @@ class _EditTaskState extends State<EditTask> {
                               },
                             ),
                             const SizedBox(width: 12),
-                            const Text('Remove expiration date',
-                                style: TextStyle(
+                            Text(
+                                lang == 'en'
+                                    ? 'Remove expiration date'
+                                    : 'Xoá bỏ ngày hết hạn',
+                                style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w400))
                           ],
                         )
@@ -190,8 +199,11 @@ class _EditTaskState extends State<EditTask> {
                         },
                       ),
                       const SizedBox(width: 12),
-                      const Text('Adjust expiration date',
-                          style: TextStyle(
+                      Text(
+                          lang == 'en'
+                              ? 'Adjust expiration date'
+                              : 'Chỉnh sửa ngày hết hạn',
+                          style: const TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w400))
                     ],
                   ),
@@ -244,24 +256,24 @@ class _EditTaskState extends State<EditTask> {
                     children: [
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(100, 40),
+                            fixedSize: const Size(120, 40),
                             backgroundColor: Colors.red,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
-                        child: const Text('Cancel'),
+                        child: Text(lang == 'en' ? 'Cancel' : 'Huỷ bỏ'),
                         onPressed: () {
                           Navigator.pop(context);
                         },
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(100, 40),
+                            fixedSize: const Size(120, 40),
                             backgroundColor: textFieldController.text.isEmpty
                                 ? Colors.grey
                                 : Colors.green,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
-                        child: const Text('Update'),
+                        child: Text(lang == 'en' ? 'Update' : 'Cập nhật'),
                         onPressed: () {
                           if (textFieldController.text.isNotEmpty) {
                             context.read<TasksProvider>().editPendingTask(
@@ -271,7 +283,11 @@ class _EditTaskState extends State<EditTask> {
                             Navigator.pop(context);
                           } else {
                             showInfoDialog(
-                                context, 'Please fill in task content!', true);
+                                context,
+                                lang == 'en'
+                                    ? 'Please fill in task content!'
+                                    : 'Vui lòng điền nội dung công việc!',
+                                true);
                           }
                         },
                       ),

@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do_app/providers/language_provider.dart';
 
 void showInfoDialog(BuildContext context, String message, bool isAlert) =>
     showDialog(
         context: context,
         builder: (BuildContext context) {
+          final lang = context.watch<LanguageProvider>().currentLanguage;
+
           return CupertinoAlertDialog(
             content: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -22,9 +26,10 @@ void showInfoDialog(BuildContext context, String message, bool isAlert) =>
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  'Close',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                child: Text(
+                  lang == "en" ? 'Close' : 'Đóng',
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w600),
                 ),
               ),
             ],

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sliding_switch/sliding_switch.dart';
 import 'package:to_do_app/data/constants.dart' as constant;
 import 'package:to_do_app/providers/active_tab_provider.dart';
 import 'package:to_do_app/providers/background_provider.dart';
+import 'package:to_do_app/providers/language_provider.dart';
+import 'package:to_do_app/utilities/app_shared_preferences.dart';
 
 class DrawerComponent extends StatelessWidget {
   const DrawerComponent({Key? key}) : super(key: key);
@@ -10,6 +13,8 @@ class DrawerComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lang = context.watch<LanguageProvider>().currentLanguage;
+
     return Drawer(
         child: Container(
             padding:
@@ -29,8 +34,9 @@ class DrawerComponent extends StatelessWidget {
                   context.read<ActiveTabProvider>().setActiveTab(0);
                   Navigator.pop(context);
                 },
-                child: const Text('Pending tasks',
-                    style: TextStyle(fontSize: 20, color: Colors.black)),
+                child: Text(
+                    lang == 'en' ? 'Pending tasks' : 'Công việc chờ xử lý',
+                    style: const TextStyle(fontSize: 20, color: Colors.black)),
               ),
               const SizedBox(height: 10),
               TextButton(
@@ -38,17 +44,17 @@ class DrawerComponent extends StatelessWidget {
                   context.read<ActiveTabProvider>().setActiveTab(1);
                   Navigator.pop(context);
                 },
-                child: const Text(
-                  'Completed tasks',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                child: Text(
+                  lang == 'en' ? 'Completed tasks' : 'Công việc đã hoàn thành',
+                  style: const TextStyle(fontSize: 20, color: Colors.black),
                 ),
               ),
               const SizedBox(height: 16),
               const Divider(),
               const SizedBox(height: 8),
-              const Text(
-                'Change app background',
-                style: TextStyle(fontSize: 16),
+              Text(
+                lang == 'en' ? 'Change app background' : 'Thay đổi hình nền',
+                style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 8),
               SizedBox(
@@ -76,6 +82,50 @@ class DrawerComponent extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(24)),
                           ));
                     }),
+              ),
+              const SizedBox(height: 16),
+              const Divider(),
+              const SizedBox(height: 8),
+              Text(
+                lang == 'en' ? 'Change app language' : 'Thay đổi ngôn ngữ',
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 8),
+              SlidingSwitch(
+                value: lang == 'vi',
+                width: 110,
+                height: 40,
+                onChanged: (bool value) {
+                  if (!value) {
+                    context.read<LanguageProvider>().setCurrentLanguage('en');
+                  } else {
+                    context.read<LanguageProvider>().setCurrentLanguage('vi');
+                  }
+
+                  AppSharedPreferences.setLanguage(value ? 'vi' : 'en');
+                },
+                onSwipe: (bool value) {
+                  if (!value) {
+                    context.read<LanguageProvider>().setCurrentLanguage('en');
+                  } else {
+                    context.read<LanguageProvider>().setCurrentLanguage('vi');
+                  }
+
+                  AppSharedPreferences.setLanguage(value ? 'vi' : 'en');
+                },
+                onTap: (bool value) {
+                  if (!value) {
+                    context.read<LanguageProvider>().setCurrentLanguage('en');
+                  } else {
+                    context.read<LanguageProvider>().setCurrentLanguage('vi');
+                  }
+
+                  AppSharedPreferences.setLanguage(value ? 'vi' : 'en');
+                },
+                onDoubleTap: () {},
+                textOff: "EN",
+                textOn: "VI",
+                animationDuration: const Duration(milliseconds: 300),
               )
             ])));
   }
