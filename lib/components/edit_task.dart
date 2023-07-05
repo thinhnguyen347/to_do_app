@@ -125,7 +125,16 @@ class _EditTaskState extends State<EditTask> {
                               ? 'Task content:'
                               : 'Nội dung công việc:',
                           style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500))
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            shadows: <Shadow>[
+                              Shadow(
+                                offset: Offset.zero,
+                                blurRadius: 10.0,
+                                color: Colors.white,
+                              )
+                            ],
+                          ))
                     ],
                   ),
                   const SizedBox(height: 12),
@@ -177,7 +186,16 @@ class _EditTaskState extends State<EditTask> {
                                     ? 'Remove expiration date'
                                     : 'Xoá bỏ ngày hết hạn',
                                 style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w400))
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  shadows: <Shadow>[
+                                    Shadow(
+                                      offset: Offset.zero,
+                                      blurRadius: 10.0,
+                                      color: Colors.white,
+                                    )
+                                  ],
+                                ))
                           ],
                         )
                       : const SizedBox(height: 0),
@@ -204,7 +222,16 @@ class _EditTaskState extends State<EditTask> {
                               ? 'Adjust expiration date'
                               : 'Chỉnh sửa ngày hết hạn',
                           style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w400))
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            shadows: <Shadow>[
+                              Shadow(
+                                offset: Offset.zero,
+                                blurRadius: 10.0,
+                                color: Colors.white,
+                              )
+                            ],
+                          ))
                     ],
                   ),
                   const SizedBox(height: 10),
