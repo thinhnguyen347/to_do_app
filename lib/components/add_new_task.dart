@@ -105,11 +105,19 @@ class _AddNewTaskState extends State<AddNewTask> {
                           size: 24, color: Colors.lightGreenAccent),
                       const SizedBox(width: 10),
                       Text(
-                          lang == 'en'
-                              ? 'Task content:'
-                              : 'Nội dung công việc:',
-                          style: const TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500))
+                        lang == 'en' ? 'Task content:' : 'Nội dung công việc:',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          shadows: <Shadow>[
+                            Shadow(
+                              offset: Offset.zero,
+                              blurRadius: 10.0,
+                              color: Colors.white,
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
                   const SizedBox(height: 12),
@@ -156,7 +164,16 @@ class _AddNewTaskState extends State<AddNewTask> {
                               ? 'Add expiration date'
                               : 'Thêm ngày hết hạn',
                           style: const TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w400))
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            shadows: <Shadow>[
+                              Shadow(
+                                offset: Offset.zero,
+                                blurRadius: 10.0,
+                                color: Colors.white,
+                              )
+                            ],
+                          ))
                     ],
                   ),
                   const SizedBox(height: 10),

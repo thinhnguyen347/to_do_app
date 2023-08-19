@@ -44,7 +44,9 @@ class MyApp extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 800),
       child: MaterialApp(
         title: 'My To-Do App',
-        theme: ThemeData(),
+        theme: ThemeData(
+          unselectedWidgetColor: Colors.blue.shade500,
+        ),
         home: const FlashScreen(),
       ),
     );

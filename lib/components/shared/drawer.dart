@@ -70,17 +70,36 @@ class DrawerComponent extends StatelessWidget {
                                 .read<BackgroundProvider>()
                                 .changeBackground(index);
                           },
-                          child: Container(
-                            height: 48,
-                            width: 48,
-                            margin: const EdgeInsets.only(right: 8, top: 8),
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage(bg[index]),
-                                    fit: BoxFit.cover,
-                                    alignment: Alignment.center),
-                                borderRadius: BorderRadius.circular(24)),
-                          ));
+                          child: Stack(children: [
+                            Container(
+                              height: 48,
+                              width: 48,
+                              margin: const EdgeInsets.only(right: 8, top: 8),
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage(bg[index]),
+                                      fit: BoxFit.cover,
+                                      alignment: Alignment.center),
+                                  borderRadius: BorderRadius.circular(24)),
+                            ),
+                            Positioned(
+                              height: 20,
+                              width: 20,
+                              left: 14,
+                              bottom: 14,
+                              child: Center(
+                                child: index ==
+                                        context
+                                            .watch<BackgroundProvider>()
+                                            .currentBackgroundIndex
+                                    ? Image.asset(
+                                        'assets/images/checkmark1.png',
+                                        width: 20,
+                                      )
+                                    : const SizedBox.shrink(),
+                              ),
+                            )
+                          ]));
                     }),
               ),
               const SizedBox(height: 16),
