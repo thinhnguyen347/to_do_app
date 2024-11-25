@@ -34,13 +34,13 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  lottie: ^1.4.2
+  lottie: ^2.3.2
   shared_preferences: ^2.0.15
-  flutter_slidable: ^2.0.0
+  flutter_slidable: ^3.1.0
   provider: ^6.0.4
-  uuid: ^3.0.6
-  intl: ^0.17.0
-  syncfusion_flutter_datepicker: ^20.3.61
+  uuid: ^4.1.0
+  intl: ^0.18.1
+  syncfusion_flutter_datepicker: ^25.1.41
   sliding_switch: ^1.1.0
 
 

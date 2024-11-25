@@ -8,10 +8,10 @@ void showAuthorDialog(BuildContext context) => showDialog(
     builder: (BuildContext context) {
       return CupertinoAlertDialog(
         title: const Text("About app"),
-        content: Column(
+        content: const Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             SizedBox(
               height: 16,
             ),
