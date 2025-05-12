@@ -1,0 +1,2 @@
+/Users/thinhnguyen/Documents/project/to_do_app/android/app/.cxx/RelWithDebInfo/164l10a2/x86/CMakeFiles/edit_cache.dir
+/Users/thinhnguyen/Documents/project/to_do_app/android/app/.cxx/RelWithDebInfo/164l10a2/x86/CMakeFiles/rebuild_cache.dir

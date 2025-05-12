@@ -1,0 +1,1 @@
+/Users/thinhnguyen/Documents/project/to_do_app/build/app/intermediates/cxx/RelWithDebInfo/164l10a2/obj/arm64-v8a
