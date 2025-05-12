@@ -15,7 +15,6 @@ const List<String> wallpaper = [
   "assets/wallpaper/13.jpg",
   "assets/wallpaper/14.jpg",
   "assets/wallpaper/15.jpg",
-  "assets/wallpaper/16.jpg",
 ];
 
-const appVersion = '2.0.9';
+const appVersion = '2.2';
