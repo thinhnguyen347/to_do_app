@@ -12,11 +12,10 @@ import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class EditTask extends StatefulWidget {
   const EditTask(
-      {Key? key,
+      {super.key,
       required this.index,
       required this.oldContent,
-      required this.oldExpDate})
-      : super(key: key);
+      required this.oldExpDate});
 
   final int index;
   final String oldContent;

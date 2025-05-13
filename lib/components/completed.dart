@@ -7,8 +7,7 @@ import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class CompletedTasks extends StatelessWidget {
   final List<Map> completedTasks;
-  const CompletedTasks({Key? key, required this.completedTasks})
-      : super(key: key);
+  const CompletedTasks({super.key, required this.completedTasks});
 
   @override
   Widget build(BuildContext context) {

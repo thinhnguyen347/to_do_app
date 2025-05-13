@@ -11,7 +11,7 @@ import 'package:to_do_app/providers/language_provider.dart';
 import 'package:to_do_app/providers/task_manage_provider.dart';
 
 class AddNewTask extends StatefulWidget {
-  const AddNewTask({Key? key}) : super(key: key);
+  const AddNewTask({super.key});
 
   @override
   State<AddNewTask> createState() => _AddNewTaskState();

@@ -8,7 +8,7 @@ import 'package:to_do_app/providers/language_provider.dart';
 import 'package:to_do_app/utilities/app_shared_preferences.dart';
 
 class DrawerComponent extends StatelessWidget {
-  const DrawerComponent({Key? key}) : super(key: key);
+  const DrawerComponent({super.key});
   final bg = constant.wallpaper;
 
   @override

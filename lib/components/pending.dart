@@ -15,8 +15,7 @@ class PendingTasks extends StatelessWidget {
   final String inTimeTaskLottie = 'assets/lottie/wavey-birdie.json';
 
   const PendingTasks(
-      {Key? key, required this.pendingTasks, required this.today})
-      : super(key: key);
+      {super.key, required this.pendingTasks, required this.today});
 
   @override
   Widget build(BuildContext context) {

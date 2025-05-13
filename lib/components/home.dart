@@ -16,7 +16,7 @@ import 'package:to_do_app/providers/task_manage_provider.dart';
 import 'package:to_do_app/utilities/app_shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
