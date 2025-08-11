@@ -85,7 +85,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                 // Clip it cleanly.
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                  child: Container(color: Colors.grey.withValues(alpha: 0.1)),
+                  child: Container(color: Colors.grey.withValues(alpha: 0.2)),
                 ),
               ),
             ),
