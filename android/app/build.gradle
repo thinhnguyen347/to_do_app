@@ -31,7 +31,7 @@ if (keystorePropertiesFile.exists()) {
 android {
     namespace = "com.example.myapp"
     compileSdkVersion 36
-    ndkVersion "26.3.11579264"
+    ndkVersion "27.0.12077973"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -48,11 +48,11 @@ android {
 
     defaultConfig {
         applicationId "com.thinhnguyen.to_do_app"
-        minSdkVersion 30
+        minSdkVersion 35
         targetSdkVersion 36
-        compileSdkVersion 34
-        versionCode 13
-        versionName "3.0.0"
+        compileSdkVersion 36
+        versionCode 14
+        versionName "3.0.1"
     }
 
     signingConfigs {
@@ -91,7 +91,7 @@ flutter {
 dependencies {
     buildscript {
         dependencies {
-            classpath 'com.android.tools.build:gradle:8.12.0' // Or a newer version
+            classpath 'com.android.tools.build:gradle:9.0.0' // Or a newer version
         }
     }
 }
