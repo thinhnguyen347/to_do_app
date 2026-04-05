@@ -31,9 +31,12 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+
     AppSharedPreferences.getBackground().then((value) {
+      if (!mounted) return;
       context.read<BackgroundProvider>().changeBackground(value ?? 0);
     });
+
 
     getPendingTasks();
     getCompletedTasks();
@@ -165,6 +168,7 @@ class _HomePageState extends State<HomePage> {
     late List<Map> list;
 
     AppSharedPreferences.getPendingTasks().then((tasks) {
+      if (!mounted) return;
       if (tasks != null) {
         list =
             tasks.map((e) => jsonDecode(e) as Map<dynamic, dynamic>).toList();
@@ -178,6 +182,7 @@ class _HomePageState extends State<HomePage> {
     late List<Map> list;
 
     AppSharedPreferences.getCompletedTasks().then((tasks) {
+      if (!mounted) return;
       if (tasks != null) {
         list =
             tasks.map((e) => jsonDecode(e) as Map<dynamic, dynamic>).toList();
@@ -188,6 +193,7 @@ class _HomePageState extends State<HomePage> {
 
   getLanguage() {
     AppSharedPreferences.getLanguage().then((language) {
+      if (!mounted) return;
       context.read<LanguageProvider>().setCurrentLanguage(language ?? 'en');
     });
   }

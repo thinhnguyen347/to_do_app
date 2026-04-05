@@ -19,4 +19,4 @@ const List<String> wallpaper = [
   "assets/wallpaper/17.jpg",
 ];
 
-const appVersion = '2.2.1';
+const appVersion = '3.0.1.2';

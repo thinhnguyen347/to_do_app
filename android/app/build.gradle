@@ -51,8 +51,8 @@ android {
         minSdkVersion 35
         targetSdkVersion 36
         compileSdkVersion 36
-        versionCode 14
-        versionName "3.0.1"
+        versionCode 15
+        versionName "3.0.1.2"
     }
 
     signingConfigs {
@@ -68,17 +68,13 @@ android {
     buildTypes {
         release {
             signingConfig signingConfigs.release
-        }
-
-        release {
             manifestPlaceholders = [applicationName: "android.app.Application"]
+            ndk {
+                debugSymbolLevel 'FULL'
+            }
         }
 
         debug {
-            manifestPlaceholders = [applicationName: "android.app.Application"]
-        }
-
-        build{
             manifestPlaceholders = [applicationName: "android.app.Application"]
         }
     }
@@ -91,7 +87,7 @@ flutter {
 dependencies {
     buildscript {
         dependencies {
-            classpath 'com.android.tools.build:gradle:9.0.0' // Or a newer version
+            classpath 'com.android.tools.build:gradle:9.1.0' // Or a newer version
         }
     }
 }
