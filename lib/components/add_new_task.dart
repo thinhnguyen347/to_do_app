@@ -62,7 +62,7 @@ class _AddNewTaskState extends State<AddNewTask> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: AppBar(
-            title: Text(lang == 'en' ? 'Add task' : 'Thêm công việc'),
+            title: Text(lang == 'en' ? 'Add task' : 'Thêm công việc', style: TextStyle(color: Colors.white)),
             centerTitle: true,
             backgroundColor: Colors.black54,
           ),
@@ -229,7 +229,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                             backgroundColor: Colors.red,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
-                        child: Text(lang == 'en' ? 'Cancel' : 'Huỷ bỏ'),
+                        child: Text(lang == 'en' ? 'Cancel' : 'Huỷ bỏ', style: TextStyle(color: Colors.white)),
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -240,7 +240,7 @@ class _AddNewTaskState extends State<AddNewTask> {
                             backgroundColor: Colors.green,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
-                        child: Text(lang == 'en' ? 'Add' : 'Thêm mới'),
+                        child: Text(lang == 'en' ? 'Add' : 'Thêm mới', style: TextStyle(color: Colors.white)),
                         onPressed: () {
                           if (textFieldController.text.isNotEmpty) {
                             context.read<TasksProvider>().addNewTask(

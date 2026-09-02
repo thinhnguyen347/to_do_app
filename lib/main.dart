@@ -66,10 +66,17 @@ class _FlashScreenState extends State<FlashScreen> {
   @override
   void initState() {
     timer = Timer(const Duration(seconds: 3), () {
+      if (!mounted) return;
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomePage()));
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override

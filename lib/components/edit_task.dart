@@ -77,7 +77,7 @@ class _EditTaskState extends State<EditTask> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: AppBar(
-            title: Text(lang == 'en' ? 'Modify task' : 'Chỉnh sửa công việc'),
+            title: Text(lang == 'en' ? 'Modify task' : 'Chỉnh sửa công việc', style: TextStyle(color: Colors.white)),
             centerTitle: true,
             backgroundColor: Colors.black54,
           ),
@@ -100,7 +100,7 @@ class _EditTaskState extends State<EditTask> {
                 // Clip it cleanly.
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                  child: Container(color: Colors.grey.withOpacity(0.1)),
+                  child: Container(color: Colors.grey.withValues(alpha: 0.1)),
                 ),
               ),
             ),
@@ -286,7 +286,7 @@ class _EditTaskState extends State<EditTask> {
                             backgroundColor: Colors.red,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
-                        child: Text(lang == 'en' ? 'Cancel' : 'Huỷ bỏ'),
+                        child: Text(lang == 'en' ? 'Cancel' : 'Huỷ bỏ', style: TextStyle(color: Colors.white)),
                         onPressed: () {
                           Navigator.pop(context);
                         },
@@ -299,7 +299,7 @@ class _EditTaskState extends State<EditTask> {
                                 : Colors.green,
                             textStyle: const TextStyle(
                                 color: Colors.white, fontSize: 18)),
-                        child: Text(lang == 'en' ? 'Update' : 'Cập nhật'),
+                        child: Text(lang == 'en' ? 'Update' : 'Cập nhật', style: TextStyle(color: Colors.white)),
                         onPressed: () {
                           if (textFieldController.text.isNotEmpty) {
                             context.read<TasksProvider>().editPendingTask(

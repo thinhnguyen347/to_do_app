@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 class LanguageProvider with ChangeNotifier, DiagnosticableTreeMixin {
-  late String _currentLanguage;
+  String _currentLanguage = 'en';
 
   String get currentLanguage => _currentLanguage;
 
