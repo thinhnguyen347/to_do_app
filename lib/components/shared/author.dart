@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../data/constants.dart';
+import '../../data/app_version.dart';
 
 void showAuthorDialog(BuildContext context) => showDialog(
     context: context,
@@ -20,7 +19,7 @@ void showAuthorDialog(BuildContext context) => showDialog(
             // Text("Phone/ Zalo: 0984018891"),
             Text("***"),
             Text(
-              "Version: $appVersion",
+              "Version: $version",
               textAlign: TextAlign.left,
             ),
             Text(
